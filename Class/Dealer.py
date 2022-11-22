@@ -19,7 +19,8 @@ class Dealer:
         self.__deck: Deck = deck
         self.__players: list[Player] = players.copy()
         self.__board: Board = board
-        self.__turn: 0
+        self.__blind: int = 0
+        self.__total_blind: int = 0
 
     # <----- getter ----->
 
@@ -31,6 +32,20 @@ class Dealer:
 
     @property
     def board(self: Dealer) -> Board: return self.__board
+    
+    @property
+    def blind(self: Dealer) -> int: return self.__blind
+    
+    @property
+    def total_blind(self: Dealer) -> int: return self.__total_blind
+    
+    # <----- setter ----->
+    
+    @blind.setter
+    def blind(self: Dealer, new_blind: int) -> None: self.__blind = new_blind
+    
+    @total_blind.setter
+    def total_blind(self: Dealer, new_total_blind: int) -> None: self.__total_blind = new_total_blind
 
     # <----- distribute ----->
 
