@@ -56,7 +56,7 @@ class Dealer:
 
         for i in range(2):
             for player in self.__players:
-                player.hand[i] = self.__deck.draw()
+                player.hand.cards.append(self.__deck.draw())
 
         self.__deck.burn()
         self.__board.cards = [self.__deck.draw() for i in range(3)]
@@ -69,7 +69,7 @@ class Dealer:
     
     def is_royal_straight_flush(self: Dealer,  player_index: int) -> bool:
         card_suit: list[str] = []
-        card_value: list[int] = []
+        card_value: list[list[int]] = []
         
         for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
             if card.suit not in card_suit:
@@ -88,7 +88,7 @@ class Dealer:
     
     def is_straight_flush(self: Dealer, player_index: int) -> list:
         card_suit: list[str] = []
-        card_value: list[int] = []
+        card_value: list[list[int]] = []
         
         for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
             if card.suit not in card_suit:
@@ -123,9 +123,9 @@ class Dealer:
     
     def is_four_of_kind(self: Dealer, player_index: int) -> list:
         cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
-        occurence: list[int] = Card.sort_occurence(cards)
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
         
-        four_of_kind: int = None
+        four_of_kind: int|None = None
         
         for tuple_card in occurence:
             if tuple_card[1] == 4:
@@ -133,7 +133,7 @@ class Dealer:
                 del occurence[occurence.index(tuple_card)]
                 
         if four_of_kind != None:
-            if isinstance(occurence[0], tuple): return (True, four_of_kind, occurence[0][0])
+            if isinstance(occurence[0], tuple): return [True, four_of_kind, occurence[0][0]]
             return [True, four_of_kind, occurence[0]]
         return [False]
         
@@ -142,10 +142,10 @@ class Dealer:
     def is_full_house(self: Dealer, player_index: int) -> list:
         
         cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
-        occurence: list[int] = Card.sort_occurence(cards)
+        occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
         
-        three_of_kind: int = None
-        pair: int = None
+        three_of_kind: int|None = None
+        pair: int|None = None
         
         for tuple_card in occurence:
             if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] > three_of_kind):
@@ -194,7 +194,7 @@ class Dealer:
             
         
         compteur: int = 0
-        hight_value: int = None
+        hight_value: int|None = None
         
         for i, card in enumerate(cards):
         
@@ -217,7 +217,7 @@ class Dealer:
         cards: list[Card] = self.__board.cards + self.__players[player_index].hand.cards
         
         occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
-        three_of_kind: int = None
+        three_of_kind: int|None = None
         
         for tuple_card in occurence:
             if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] > three_of_kind):
@@ -249,13 +249,13 @@ class Dealer:
     
     # <----- is_one_pair ----->
     
-    def is_one_pair(self: Dealer, player_index: int) -> bool | list:
+    def is_one_pair(self: Dealer, player_index: int) -> list:
             
         cards: list[Card] = self.__board.cards + self.__players[player_index].hand.cards
        
         occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
         
-        pair: int = None
+        pair: int|None = None
         
         for tuple_card in occurence:
             if tuple_card[1] == 2 and (pair == None or tuple_card[0] > pair):
@@ -263,9 +263,9 @@ class Dealer:
                 del occurence[occurence.index(tuple_card)]
         
         if pair != None: return [True, pair, occurence[0][0], occurence[1][0], occurence[2][0]]
-        else: return False
+        else: return [False]
 
-    def is_hight_card(self: Dealer, player_index: int) -> list[int, int, int, int, int]:
+    def is_hight_card(self: Dealer, player_index: int) -> list[int]:
         cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
         cards.sort(reverse = True)
         while cards[-1] == 1:
@@ -282,25 +282,25 @@ class Dealer:
             return [10]
             
         elif self.is_straight_flush(player_index)[0]:
-            return [9] + self.is_straight_flush(player_index)(player_index)[1:]
+            return [9] + self.is_straight_flush(player_index)[1:]
             
         elif self.is_four_of_kind(player_index)[0]:
-            return [5] + self.is_four_of_kind(player_index)(player_index)[1:]
+            return [5] + self.is_four_of_kind(player_index)[1:]
             
-        elif self.is_full_house()(player_index)[0]:
-            return [7] + self.is_straight(player_index)(player_index)[1:]
+        elif self.is_full_house(player_index)[0]:
+            return [7] + self.is_straight(player_index)[1:]
             
         elif self.is_flush(player_index)[0]:
-            return [6] + self.is_flush(player_index)(player_index)[1:]
+            return [6] + self.is_flush(player_index)[1:]
             
         elif self.is_straight(player_index)[0]:
-            return [5] + self.is_straight(player_index)(player_index)[1:]
+            return [5] + self.is_straight(player_index)[1:]
         
         elif self.is_tree_of_kind(player_index)[0]:
             return [4] + self.is_tree_of_kind(player_index)[1:]
         
         elif self.is_two_pairs(player_index)[0]:
-            return [3] + self.is_two_pairs()(player_index)[1:]
+            return [3] + self.is_two_pairs(player_index)[1:]
         
         elif self.is_one_pair(player_index)[0]:
             return [2] + self.is_one_pair(player_index)[1:]

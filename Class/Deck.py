@@ -13,7 +13,7 @@ class Deck:
     
     # <----- init ----->
     
-    def __init__(self: Deck, numberOfCards: int = 52, suitList: list[str] = None) -> None:
+    def __init__(self: Deck, numberOfCards: int = 52, suitList: list[str]|None = None) -> None:
         if suitList == None: suitList = ["Hearts","Diamonds","Clubs","Spades"]
         
         self.__SUIT_LIST: Final[list[str]] = suitList.copy()
