@@ -88,11 +88,3 @@ class Card:
             del occurence[-1]
             
         return occurence
-
-    # <----- same_suit_list ----->
-    
-    @staticmethod
-    def same_suit_list(cards: list[Card]) -> bool:
-        for i in range(len(cards)-1):
-            if cards[i].same_suit(cards[i+1]) == False: return False
-        return True 
