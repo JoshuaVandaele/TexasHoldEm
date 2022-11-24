@@ -9,18 +9,18 @@ class Hand:
     
     # <----- init ----->
     
-    def __init__(self: Hand, cards: tuple[Card * 2]) -> None:
-        self.__cards: tuple[Card * 2] = cards
+    def __init__(self: Hand, cards: list[Card]) -> None:
+        self.__cards: list[Card] = cards
         
     # <----- getter ----->
     
     @property
-    def cards(self: Hand) -> tuple[Card * 2]: return self.__cards
+    def cards(self: Hand) -> list[Card]: return self.__cards
     
     # <----- setter ----->
     
     @cards.setter
-    def cards(self: Hand, newCards: tuple[Card * 2]) -> None: self.__cards = newCards
+    def cards(self: Hand, newCards: list[Card]) -> None: self.__cards = newCards
     
     # <----- getKicker ----->
     

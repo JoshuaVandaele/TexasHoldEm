@@ -76,7 +76,7 @@ class Card:
     
     @staticmethod
     def sort_occurence(cards: list[Card]) -> list[tuple[int, int]]:
-        occurence: list[tuple(int, int)] = []
+        occurence: list[tuple[int, int]] = []
         
         for card in cards:
             if (card.value, cards.count(card)) not in occurence:
