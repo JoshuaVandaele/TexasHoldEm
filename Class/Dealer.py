@@ -98,7 +98,7 @@ class Dealer:
                 card_value[card_suit.index(card.suit)].append(card.value)
         
         compteur = 0
-        hight_value = None
+        highest_value = None
         
         for value in card_value:
             if len(value) > 4:
@@ -108,12 +108,12 @@ class Dealer:
                         if i < len(value) - 1:
                             if card - 1 == value[i+1]:
                                 compteur +=1
-                            if hight_value == None: hight_value = card
+                            if highest_value == None: highest_value = card
                         elif compteur < 4:
                             compteur = 0
-                            hight_value = None
+                            highest_value = None
         
-                if compteur >= 4: return [True, hight_value]
+                if compteur >= 4: return [True, highest_value]
                 
         return [False]
                     
@@ -194,19 +194,19 @@ class Dealer:
             
         
         compteur: int = 0
-        hight_value: int|None = None
+        highest_value: int|None = None
         
         for i, card in enumerate(cards):
         
             if i < len(cards) - 1:
                 if card - 1 == cards[i+1]:
                     compteur +=1
-                    if hight_value == None: hight_value = card
+                    if highest_value == None: highest_value = card
                 else:
                     compteur = 0
-                    hight_value = None
+                    highest_value = None
         
-        if compteur >= 4: return [True, hight_value]
+        if compteur >= 4: return [True, highest_value]
         return [False]
     
     
@@ -265,7 +265,7 @@ class Dealer:
         if pair != None: return [True, pair, occurence[0][0], occurence[1][0], occurence[2][0]]
         else: return [False]
 
-    def is_hight_card(self: Dealer, player_index: int) -> list[int]:
+    def is_highest_card(self: Dealer, player_index: int) -> list[int]:
         cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
         cards.sort(reverse = True)
         while cards[-1] == 1:
@@ -306,7 +306,7 @@ class Dealer:
             return [2] + self.is_one_pair(player_index)[1:]
         
         else:
-            return [1] + self.is_hight_card(player_index)
+            return [1] + self.is_highest_card(player_index)
         
     # <----- compare_hand ----->
     
