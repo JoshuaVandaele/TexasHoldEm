@@ -8,7 +8,7 @@ from jeu.ui.ui import UI
 
 
 class Button(UI):
-    def __init__(self: Button, screen: pygame.surface.Surface, image: pygame.surface.Surface | None, position: tuple[float, float], text: str, font: pygame.font.Font, color: str, hover_color: str, action: Callable = lambda: None, detection_offset: tuple[float, float] = (0, 0)) -> None:
+    def __init__(self: Button, screen: pygame.surface.Surface, image: pygame.surface.Surface | None, position: tuple[float, float], text: str, font: pygame.font.Font, color: str, hover_color: str, action: Callable = lambda: None, enforced_size: tuple[int, int]|None = None, detection_offset: tuple[float, float] = (0, 0)) -> None:
         """Button UI elements
 
         Args:
@@ -20,6 +20,7 @@ class Button(UI):
             color (str): Color of the text
             hover_color (str): Color of the text when hovering
             action (Callable): Function to call upon button click
+            enforced_size (tuple[int, int]): Enforced size of the button
             detection_offset (tuple[float, float]): Offset for the mouse/button interaction
         """
         super().__init__(screen)
@@ -30,11 +31,12 @@ class Button(UI):
         self.text = text
         self.text_render = self.font.render(self.text, True, self.color)
         self.action = action
+        self.enforced_size = enforced_size
         self.detection_offset = detection_offset
-        if not self.image:
-            self.image = self.text_render
-        self.rect = self.image.get_rect(center=self.position)
-        self.text_rect = self.text_render.get_rect(center=self.position)
+        if not self.image: self.image = self.text_render
+        if self.enforced_size:  self.image = pygame.transform.scale(self.image, self.enforced_size)
+        self.text_rect = self.text_render.get_rect(center = self.position)
+        self.rect = self.image.get_rect(center = self.position)
 
     def update_render(self: Button) -> None:
         """Updates the button's render
