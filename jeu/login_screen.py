@@ -1,12 +1,9 @@
-import sys
-
 import pygame
 from jeu.ui.button import Button
 from jeu.ui.popup import Popup
 from jeu.ui.textbox import Textbox
-from jeu.ui.ui import UI
 from jeu.utils.font_manager import FontManager
-
+from jeu.utils.assets_import import resource_path
 
 def login_screen(screen: pygame.surface.Surface):
     """Login screen
@@ -14,7 +11,7 @@ def login_screen(screen: pygame.surface.Surface):
     Args:
         screen (pygame.surface.Surface): Screen to display the menu on
     """
-    login_font: FontManager = FontManager("jeu/assets/fonts/Truculenta.ttf")
+    login_font: FontManager = FontManager(resource_path("jeu/assets/fonts/Truculenta.ttf"))
 
     # Initializing on-screen elements #
     login_popup: Popup = Popup(screen, "Account", (500, 580), "#0575BB")
@@ -48,7 +45,7 @@ def login_screen(screen: pygame.surface.Surface):
     )
     login_button = Button(
         screen=login_popup.surface,
-        image=pygame.image.load("jeu/assets/images/Login Rect.png"),
+        image=pygame.image.load(resource_path("jeu/assets/images/Login Rect.png")),
         position=(login_popup.surface.get_size()[0]//2*0.5, 500),
         text="Login",
         font=login_font.get_font(50),
@@ -58,7 +55,7 @@ def login_screen(screen: pygame.surface.Surface):
     )
     register_button = Button(
         screen=login_popup.surface,
-        image=pygame.image.load("jeu/assets/images/Login Rect.png"),
+        image=pygame.image.load(resource_path("jeu/assets/images/Login Rect.png")),
         position=(login_popup.surface.get_size()[0]//2*1.5, 500),
         text="Register",
         font=login_font.get_font(50),

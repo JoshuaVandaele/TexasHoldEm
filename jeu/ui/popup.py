@@ -4,6 +4,7 @@ import pygame
 from jeu.ui.ui import UI
 from jeu.utils.font_manager import FontManager
 from jeu.ui.button import Button
+from jeu.utils.assets_import import resource_path
 
 
 class Popup(UI):
@@ -19,13 +20,13 @@ class Popup(UI):
         super().__init__(screen)
         self.active = True  
         self.color = color
-        self.font: FontManager = FontManager("jeu/assets/fonts/Truculenta.ttf")
+        self.font: FontManager = FontManager(resource_path("jeu/assets/fonts/Truculenta.ttf"))
         self.surface = pygame.Surface(size)
         self.title: pygame.surface.Surface = self.font.get_font(100).render(title, True, "#EEEEEE")
         self.title_rect: pygame.rect.Rect = self.title.get_rect(center=(self.surface.get_rect().center[0], 50))
         self.elements: list[UI] = []
 
-        close_button_img = pygame.image.load("jeu/assets/images/close.png")
+        close_button_img = pygame.image.load(resource_path("jeu/assets/images/close.png"))
         self.offset = (
             (screen.get_width()-size[0])/2,
             (screen.get_height()-size[1])/2,
