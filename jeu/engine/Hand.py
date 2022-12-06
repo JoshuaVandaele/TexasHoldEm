@@ -21,10 +21,4 @@ class Hand:
     
     @cards.setter
     def cards(self: Hand, newCards: list[Card]) -> None: self.__cards = newCards
-    
-    # <----- getKicker ----->
-    
-    def get_kicker(self: Hand) -> Card:
-        if self.__cards[0] > self.__cards[1]: return self.__cards[0]
-        else: return self.__cards[1]
         

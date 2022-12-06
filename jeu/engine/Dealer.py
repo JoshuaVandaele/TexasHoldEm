@@ -50,6 +50,12 @@ class Dealer:
     # <----- distribute ----->
 
     def distribute(self: Dealer, shuffle: bool = False) -> None:
+        """ Distribute card with casino method
+
+        Args:
+            self (Dealer): self
+            shuffle (bool, optional):for shuffle or the deck when you use the function. Defaults to False.
+        """
         if shuffle:
             self.__deck.reset_deck()
             self.__deck.shuffle()
@@ -68,6 +74,15 @@ class Dealer:
     # <----- is_royal_straight_flush----->
 
     def is_royal_straight_flush(self: Dealer,  player_index: int) -> bool:
+        """ Define if their have royal straight flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            bool: royal straight flush = True else False
+        """
         card_suit: list[str] = []
         card_value: list[list[int]] = []
 
@@ -87,6 +102,15 @@ class Dealer:
     # <----- is_straight_flush ----->
 
     def is_straight_flush(self: Dealer, player_index: int) -> list:
+        """ Define if their have straight flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have straight flush = True + hand composition or False in a list
+        """
         card_suit: list[str] = []
         card_value: list[list[int]] = []
 
@@ -123,6 +147,15 @@ class Dealer:
     # <----- is_four_of_kind ----->
 
     def is_four_of_kind(self: Dealer, player_index: int) -> list:
+        """ Define if their have four of kind
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have four of kind = True + hand composition or False in a list
+        """
         cards: list[Card] = [card for card in (
             self.__board.cards + self.__players[player_index].hand.cards)]
         occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
@@ -143,6 +176,15 @@ class Dealer:
     # <----- is_full_house ----->
 
     def is_full_house(self: Dealer, player_index: int) -> list:
+        """ Define if their have full house
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have full house = True + hand composition or False in a list
+        """
 
         cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
         occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
@@ -164,6 +206,15 @@ class Dealer:
     # <----- is_flush ----->
 
     def is_flush(self: Dealer, player_index: int) -> list:
+        """ Define if their have flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have flush = True + hand composition or False in a list
+        """
 
         cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
         cards.sort(reverse=True)
@@ -186,6 +237,15 @@ class Dealer:
     # <----- is_straight ----->
 
     def is_straight(self: Dealer, player_index: int) -> list:
+        """ Define if their have straight
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have straight = True + hand composition or False in a list
+        """
 
         cards: list[int] = [card.value for card in (
             self.__board.cards + self.__players[player_index].hand.cards)]
@@ -215,6 +275,15 @@ class Dealer:
     # <----- is_three_of_kind ----->
 
     def is_tree_of_kind(self: Dealer, player_index: int) -> list:
+        """ Define if their have tree of kind
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have tree of kind = True + hand composition or False in a list
+        """
 
         cards: list[Card] = self.__board.cards + \
             self.__players[player_index].hand.cards
@@ -235,6 +304,15 @@ class Dealer:
     # <----- is_two_pairs----->
 
     def is_two_pairs(self: Dealer, player_index: int) -> list:
+        """ Define if their have two pairs
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have two pairs = True + hand composition or False in a list
+        """
 
         cards: list[Card] = self.__board.cards + \
             self.__players[player_index].hand.cards
@@ -260,6 +338,15 @@ class Dealer:
     # <----- is_one_pair ----->
 
     def is_one_pair(self: Dealer, player_index: int) -> list:
+        """ Define if their have one pair
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have one pair = True + hand composition or False in a list
+        """
 
         cards: list[Card] = self.__board.cards + \
             self.__players[player_index].hand.cards
@@ -279,6 +366,15 @@ class Dealer:
             return [False]
 
     def is_highest_card(self: Dealer, player_index: int) -> list[int]:
+        """define the hand if you doesn't have combination
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list[int]: the hand composition
+        """
         cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
         cards.sort(reverse=True)
         while cards[-1] == 1:
@@ -290,6 +386,15 @@ class Dealer:
     # <----- get_best_combination ----->
 
     def get_best_combination(self: Dealer, player_index: int) -> list:
+        """define the best combination
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: list compose by hand power + hand composition
+        """
 
         if self.is_royal_straight_flush(player_index):
             return [10]
@@ -324,6 +429,16 @@ class Dealer:
     # <----- compare_hand ----->
 
     def compare_hand(self: Dealer, player1_index: int, player2_index: int) -> int:
+        """compare two hand
+
+        Args:
+            self (Dealer): self
+            player1_index (int): player 1 you want to check
+            player2_index (int): player 2 you want to check
+
+        Returns:
+            int: return the index of the best player hand or -1 if their are equals
+        """
         player_1: list = self.get_best_combination(player1_index)
         player_2: list = self.get_best_combination(player2_index)
 
