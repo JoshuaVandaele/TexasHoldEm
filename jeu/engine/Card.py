@@ -76,6 +76,14 @@ class Card:
     
     @staticmethod
     def sort_occurence(cards: list[Card]) -> list[tuple[int, int]]:
+        """ sort the occurence of cards in a list
+
+        Args:
+            cards (list[Card]): cards list
+
+        Returns:
+            list[tuple[int, int]]: the list of tuple(occurence, value)
+        """
         occurence: list[tuple[int, int]] = []
         
         for card in cards:
