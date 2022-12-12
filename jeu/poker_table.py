@@ -23,22 +23,21 @@ list_board_card: list[pygame.surface.Surface] = []
 def next_dealer() -> None:
     global current_dealer
     global list_players
-    
-    current_dealer += 1
-    if current_dealer == len(list_players): current_dealer = 0
+        
+    current_dealer = (current_dealer + 1) % len(list_players)
+
     
 def next_player() -> None:
     global current_player
     global list_players
     
-    current_player += 1
-    if current_player == len(list_players): current_player = 0
+    current_player = (current_player + 1) % len(list_players)
     
-def who_n_next_player(n :int) -> int:
+def who_next_player() -> int:
     global current_player
     global list_players
     
-    return (current_player + n) % len(list_players)
+    return (current_player + 1) % len(list_players)
     
 def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankroll: int = 100 ) -> None:
     
@@ -94,7 +93,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     
     # <===== PLAYER 2 =====>
     
-    text_j2: pygame.surface.Surface = list_players_font[who_n_next_player(1)]
+    text_j2: pygame.surface.Surface = list_players_font[who_next_player()]
     rect_j2: pygame.rect.Rect = text_j2.get_rect(center = (1280 - 175, 720 - 675))
     
     card_j2_1: pygame.surface.Surface = pygame.image.load("jeu/assets/images/card/card_back.png")
@@ -284,10 +283,10 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
         screen.blit(players_token_rect[current_dealer][0], players_token_rect[current_dealer][1])
         
         screen.blit(list_players_font[current_player], rect_j1)
-        screen.blit(list_players_font[who_n_next_player(1)], rect_j2)
+        screen.blit(list_players_font[who_next_player()], rect_j2)
         
         screen.blit(menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 + 225, 720 - 75)))
-        screen.blit(menu_font.get_font(25).render(str(list_players[who_n_next_player(1)].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[who_n_next_player(1)].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 - 225, 75)))
+        screen.blit(menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 - 225, 75)))
         
         for event in pygame.event.get():
             match (event.type):

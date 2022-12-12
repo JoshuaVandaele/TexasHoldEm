@@ -44,6 +44,7 @@ def main_menu(screen: pygame.surface.Surface):
         hover_color="#d7fcd4",
         action=lambda: poker_table(screen, ["PLAYERNAME00", "PLAYERNAME01"])
     )
+    
     options_button = Button(
         screen=screen,
         image=pygame.image.load(resource_path("jeu/assets/images/Options Rect.png")),
@@ -54,6 +55,7 @@ def main_menu(screen: pygame.surface.Surface):
         hover_color="#d7fcd4",
         action=lambda: options_screen(screen)
     )
+    
     quit_button = Button(
         screen=screen,
         image=pygame.image.load(resource_path("jeu/assets/images/Quit Rect.png")),
