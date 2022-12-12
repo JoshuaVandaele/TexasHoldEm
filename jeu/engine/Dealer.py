@@ -15,10 +15,10 @@ class Dealer:
 
     # <----- init ----->
 
-    def __init__(self: Dealer, deck: Deck, players: list[Player], board: Board) -> None:
-        self.__deck: Deck = deck
+    def __init__(self: Dealer, players: list[Player]) -> None:
+        self.__deck: Deck = Deck()
         self.__players: list[Player] = players.copy()
-        self.__board: Board = board
+        self.__board: Board = Board([])
         self.__blind: int = 0
         self.__total_blind: int = 0
 
@@ -60,16 +60,16 @@ class Dealer:
             self.__deck.reset_deck()
             self.__deck.shuffle()
 
-        for i in range(2):
-            for player in self.__players:
-                player.hand.cards.append(self.__deck.draw())
+        for player in self.__players:
+            player.hand.cards[0] = self.__deck.draw()
+            player.hand.cards[1] = self.__deck.draw()
 
         self.__deck.burn()
         self.__board.cards = [self.__deck.draw() for i in range(3)]
         self.__deck.burn()
-        self.__board.cards[3] = self.__deck.draw()
+        self.__board.cards.append(self.__deck.draw())
         self.__deck.burn()
-        self.__board.cards[4] = self.__deck.draw()
+        self.__board.cards.append(self.__deck.draw())
 
     # <----- is_royal_straight_flush----->
 

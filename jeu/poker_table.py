@@ -9,9 +9,7 @@ from jeu.ui.int_textbox import Int_Textbox
 
 from jeu.engine.Dealer import Dealer
 from jeu.engine.Card import Card
-from jeu.engine.Deck import Deck
 from jeu.engine.Player import Player
-from jeu.engine.Board import Board
 from jeu.engine.Hand import Hand
 
 current_dealer: int = 0
@@ -20,6 +18,7 @@ current_player: int = 0
 list_players: list[Player] = []
 list_players_font: list[pygame.surface.Surface] = []
 list_players_hand: list[list[pygame.surface.Surface]] = []
+list_board_card: list[pygame.surface.Surface] = []
 
 def next_dealer() -> None:
     global current_dealer
@@ -34,21 +33,21 @@ def next_player() -> None:
     
     current_player += 1
     if current_player == len(list_players): current_player = 0
-
-def who_next_player() -> int:
+    
+def who_n_next_player(n :int) -> int:
     global current_player
     global list_players
     
-    if current_player + 1 == len(list_players): return 0
-    return current_player + 1
+    return (current_player + n) % len(list_players)
     
-def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | None = None, blind: int = 100 ) -> None:
+def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankroll: int = 100 ) -> None:
     
     global current_dealer
     global current_player
     global list_players
     global list_players_font
     global list_players_hand
+    global list_board_card
     
     # <===== BACKGROUND =====>
     
@@ -56,36 +55,13 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
     menu_font: FontManager = FontManager("jeu/assets/fonts/Truculenta.ttf")
     background: pygame.surface.Surface = pygame.image.load("jeu/assets/images/backgound_poker.jpeg")
     
-    h: Hand = Hand([Card(2, 'spade'), Card(2, 'heart')])
-    h2: Hand = Hand([Card(3, 'diamond'), Card(3, 'club')])
-    
-    if players_list == None: list_players = [Player('USERNAME00',0 , h, blind), Player('USERNAME01',1 , h2, blind)]
-    else: players_list = [Player('USERNAME00',0 , h, blind), Player('USERNAME01',1 , h2, blind)]
-    
-    board: Board = Board([Card(1, 'spade'), Card(13, 'spade'), Card(12, 'spade'), Card(11, 'spade'), Card(10, 'spade')])
-    
-    dealer: Dealer = Dealer(Deck(), list_players, board)
+    dealer: Dealer = Dealer([Player(player, Hand([Card(-1,'init'),Card(-1,'init')]), bankroll) for player in players_list])
+    dealer.distribute(shuffle = True)
 
-    list_players_font = [menu_font.get_font(50).render(player.name, True, "#EEEEEE") for player in list_players]
+    list_board_card = [pygame.image.load("jeu/assets/images/card/card_back.png")] * 5
+    list_players = [player for player in dealer.players]
+    list_players_font = [menu_font.get_font(50).render(player, True, "#EEEEEE") for player in players_list]
     list_players_hand = [[pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[0].suit}/{player.hand.cards[0].value}.png"),pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[1].suit}/{player.hand.cards[1].value}.png")] for player in dealer.players]
-    
-    
-    # < ===== BOARD =====>
-    
-    board_flop_1: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Card/card_back.png")
-    rect_board_flop_1: pygame.rect.Rect = board_flop_1.get_rect(center = (1280 / 2, 720 /2 - 100))
-    
-    board_flop_2: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Card/card_back.png")
-    rect_board_flop_2: pygame.rect.Rect = board_flop_2.get_rect(center = (1280 / 2 - 200, 720 /2 - 100))
-    
-    board_flop_3: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Card/card_back.png")
-    rect_board_flop_3: pygame.rect.Rect = board_flop_3.get_rect(center = (1280 / 2 + 200, 720 /2 - 100))
-    
-    board_turn: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Card/card_back.png")
-    rect_board_turn: pygame.rect.Rect = board_turn.get_rect(center = (1280 / 2 - 100, 720 /2 + 100))
-    
-    board_river: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Card/card_back.png")
-    rect_board_river: pygame.rect.Rect = board_river.get_rect(center = (1280 / 2 + 100, 720 /2 + 100))
     
     # <===== BOARD CHIP =====>
     
@@ -118,7 +94,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
     
     # <===== PLAYER 2 =====>
     
-    text_j2: pygame.surface.Surface = list_players_font[who_next_player()]
+    text_j2: pygame.surface.Surface = list_players_font[who_n_next_player(1)]
     rect_j2: pygame.rect.Rect = text_j2.get_rect(center = (1280 - 175, 720 - 675))
     
     card_j2_1: pygame.surface.Surface = pygame.image.load("jeu/assets/images/card/card_back.png")
@@ -139,6 +115,35 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
     table: pygame.surface.Surface = pygame.image.load("jeu/assets/images/poker_table.jpg")
     rect_table: pygame.rect.Rect = table.get_rect(center = (1280 / 2, 720 / 2))
     
+    # <===== REVEAL FLOP =====>
+    
+    def reveal_flop() -> None:
+        list_board_card[0] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[0].suit}/{dealer.board.cards[0].value}.png")
+        list_board_card[1] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[1].suit}/{dealer.board.cards[1].value}.png")
+        list_board_card[2] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[2].suit}/{dealer.board.cards[2].value}.png")
+    
+    # <===== REVEAL TURN =====>
+    
+    def reveal_turn() -> None:
+        list_board_card[3] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[3].suit}/{dealer.board.cards[3].value}.png")
+        
+    # <===== REVEAL RIVER =====>
+    
+    def reveal_river() -> None:
+        list_board_card[4] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[4].suit}/{dealer.board.cards[4].value}.png")
+    
+    # <===== ALL IN =====>
+    
+    def all_in() -> None:
+        
+        if list_players[current_player].bankroll.bankroll > dealer.blind:
+            dealer.blind = list_players[current_player].bankroll.bankroll
+            
+        dealer.total_blind += list_players[current_player].bankroll.bankroll
+        list_players[current_player].bankroll.bankroll = 0
+        
+        swap_player()
+        
     # <===== Bet Popup =====>
     
     bet_font: FontManager = FontManager(resource_path("jeu/assets/fonts/Truculenta.ttf"))
@@ -157,17 +162,17 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
         global text_chip_value
         global rect_chip_value
         
-        if bet_textbox.text != None and int(bet_textbox.text) <= list_players[current_player].bankroll.bankroll and int(bet_textbox.text) >= dealer.blind:
-            list_players[current_player].bankroll.bankroll -= int(bet_textbox.text)
-            dealer.blind = int(bet_textbox.text)
-            dealer.total_blind += int(bet_textbox.text) 
-            bet_textbox.text = ''
-            text_chip_value = menu_font.get_font(25).render(str(dealer.total_blind), True, "#EEEEEE")
-            rect_chip_value = text_chip_value.get_rect(center = (1280 / 2 + 350, 720 / 2))
-            
+        if bet_textbox.text != '':
+            if bet_textbox.text != None and int(bet_textbox.text) <= list_players[current_player].bankroll.bankroll and int(bet_textbox.text) >= dealer.blind:
+                list_players[current_player].bankroll.bankroll -= int(bet_textbox.text)
+                dealer.blind = int(bet_textbox.text)
+                dealer.total_blind += int(bet_textbox.text) 
+                bet_textbox.text = ''
+    
             bet_popup.active = False
     
             swap_player()
+        
             
     done_button = Button(
         screen = bet_popup.surface,
@@ -228,7 +233,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
         font=menu_font.get_font(30),
         color="#000000",
         hover_color="#555555",
-        action = lambda: print("All In"),
+        action = all_in,
         enforced_size = (120, 35)
     )
     
@@ -257,11 +262,11 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
         
         screen.blit(table, rect_table)
         
-        screen.blit(board_flop_1, rect_board_flop_1)
-        screen.blit(board_flop_2, rect_board_flop_2)
-        screen.blit(board_flop_3, rect_board_flop_3)
-        screen.blit(board_turn, rect_board_turn)
-        screen.blit(board_river, rect_board_river)
+        screen.blit(list_board_card[0], list_board_card[0].get_rect(center = (1280 / 2, 720 /2 - 100)))
+        screen.blit(list_board_card[1], list_board_card[1].get_rect(center = (1280 / 2 - 200, 720 /2 - 100)))
+        screen.blit(list_board_card[2], list_board_card[2].get_rect(center = (1280 / 2 + 200, 720 /2 - 100)))
+        screen.blit(list_board_card[3], list_board_card[3].get_rect(center = (1280 / 2 - 100, 720 /2 + 100)))
+        screen.blit(list_board_card[4], list_board_card[4].get_rect(center = (1280 / 2 + 100, 720 /2 + 100)))
         
         screen.blit(board_chip, rect_board_chip)
         screen.blit(menu_font.get_font(25).render(str(dealer.total_blind), True, "#EEEEEE"), menu_font.get_font(25).render(str(dealer.total_blind), True, "#EEEEEE").get_rect(center = (1280 / 2 + 350, 720 / 2)))
@@ -279,10 +284,10 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[Player] | Non
         screen.blit(players_token_rect[current_dealer][0], players_token_rect[current_dealer][1])
         
         screen.blit(list_players_font[current_player], rect_j1)
-        screen.blit(list_players_font[who_next_player()], rect_j2)
+        screen.blit(list_players_font[who_n_next_player(1)], rect_j2)
         
         screen.blit(menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 + 225, 720 - 75)))
-        screen.blit(menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 - 225, 75)))
+        screen.blit(menu_font.get_font(25).render(str(list_players[who_n_next_player(1)].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[who_n_next_player(1)].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 - 225, 75)))
         
         for event in pygame.event.get():
             match (event.type):

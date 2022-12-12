@@ -42,7 +42,7 @@ def main_menu(screen: pygame.surface.Surface):
         font=menu_font.get_font(75),
         color="#FFFFFF",
         hover_color="#d7fcd4",
-        action=lambda: poker_table(screen)
+        action=lambda: poker_table(screen, ["PLAYERNAME00", "PLAYERNAME01"])
     )
     options_button = Button(
         screen=screen,
