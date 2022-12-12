@@ -69,6 +69,8 @@ class Textbox(UI):
                 self.text = self.text[:-1]
             case pygame.K_ESCAPE:
                 self.focused = False
+            case pygame.K_KP_ENTER: pass
+            case pygame.K_RETURN: pass
             case _:
                 self.text += event.unicode
 
