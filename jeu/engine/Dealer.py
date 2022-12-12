@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from Card import Card
-from Deck import Deck
-from Player import Player
-from Board import Board
-from Hand import Hand
+from jeu.engine.Card import Card
+from jeu.engine.Deck import Deck
+from jeu.engine.Player import Player
+from jeu.engine.Board import Board
+from jeu.engine.Hand import Hand
 
 # <========= class ==========>
 

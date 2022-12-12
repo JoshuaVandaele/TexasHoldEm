@@ -5,7 +5,7 @@ from __future__ import annotations
 from random import shuffle
 from typing import Final
 
-from Card import Card
+from jeu.engine.Card import Card
 
 # <========== Class ==========>
 

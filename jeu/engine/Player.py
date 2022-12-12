@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from Bankroll import Bankroll
-from Hand import Hand
+from jeu.engine.Bankroll import Bankroll
+from jeu.engine.Hand import Hand
 
 # <========== Class ==========>
 
@@ -11,10 +11,10 @@ class Player:
     
     # <----- init ----->
     
-    def __init__(self: Player, name: str, id: int, hand: Hand) -> None:
+    def __init__(self: Player, name: str, id: int, hand: Hand, bankroll: int) -> None:
         self.__name: str = name
         self.__id = id
-        self.__bankroll: Bankroll = Bankroll()
+        self.__bankroll: Bankroll = Bankroll(bankroll)
         self.__bet: int = 0
         self.__hand: Hand = hand
     
