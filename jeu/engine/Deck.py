@@ -14,7 +14,7 @@ class Deck:
     # <----- init ----->
     
     def __init__(self: Deck, numberOfCards: int = 52, suitList: list[str]|None = None) -> None:
-        if suitList == None: suitList = ["Hearts","Diamonds","Clubs","Spades"]
+        if suitList == None: suitList = ["heart","diamond","club","spade"]
         
         self.__SUIT_LIST: Final[list[str]] = suitList.copy()
         self.__NUMBER_OF_CARDS: Final[int] = numberOfCards
