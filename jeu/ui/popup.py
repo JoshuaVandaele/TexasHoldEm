@@ -1,11 +1,20 @@
 from __future__ import annotations
 
-import pygame
-from jeu.ui.ui import UI
-from jeu.utils.font_manager import FontManager
-from jeu.ui.button import Button
-from jeu.utils.assets_import import resource_path
+import sys
 
+import pygame
+
+from jeu.ui.button import Button
+from jeu.ui.ui import UI
+from jeu.utils.assets_import import resource_path
+from jeu.utils.font_manager import FontManager
+
+
+def quit():
+    """Quits the program
+    """
+    pygame.quit()
+    sys.exit()
 
 class Popup(UI):
     def __init__(self: Popup, screen: pygame.surface.Surface, title: str, size: tuple[float, float], color: str = "white") -> None:
@@ -25,6 +34,7 @@ class Popup(UI):
         self.title: pygame.surface.Surface = self.font.get_font(100).render(title, True, "#EEEEEE")
         self.title_rect: pygame.rect.Rect = self.title.get_rect(center=(self.surface.get_rect().center[0], 50))
         self.elements: list[UI] = []
+        self.rects: dict[pygame.surface.Surface, pygame.rect.Rect] = {}
 
         close_button_img = pygame.image.load(resource_path("jeu/assets/images/close.png"))
         self.offset = (
@@ -56,6 +66,9 @@ class Popup(UI):
         if not self.active: return
         self.surface.fill(self.color)
         
+        for s, r in self.rects.items():
+            self.surface.blit(s, r)
+
         for e in self.elements:
             e.update_render()
         self.surface.blit(self.title, self.title_rect)
@@ -82,10 +95,15 @@ class Popup(UI):
         element.detection_offset = self.offset
         self.elements.append(element)
     
+    def add_rect(self, surface, rect: pygame.rect.Rect):
+        self.rects[surface] = rect
+
     def run(self):
         self.active = True
         while self.active:
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
                 self.update(event)
             self.update_render()
             pygame.display.update()

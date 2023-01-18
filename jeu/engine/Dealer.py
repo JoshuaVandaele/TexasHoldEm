@@ -20,7 +20,7 @@ class Dealer:
         self.__deck: Deck = Deck()
         self.__players: list[Player] = players.copy()
         self.__board: Board = Board([])
-        self.__blind: int = big_blind
+        self.__blind: int = 0
         self.__total_blind: int = big_blind + (big_blind // 2)
         self.__big_blind: int = big_blind
 
