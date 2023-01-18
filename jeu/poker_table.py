@@ -87,23 +87,23 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     # <----- BACKGROUND ----->
     
     pygame.display.set_caption("Texas Hold'Em")
-    menu_font: FontManager = FontManager("jeu/assets/fonts/Truculenta.ttf")
-    background: pygame.surface.Surface = pygame.image.load("jeu/assets/images/backgound_poker.jpeg")
+    menu_font: FontManager = FontManager(resource_path("jeu/assets/fonts/Truculenta.ttf"))
+    background: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/backgound_poker.jpeg"))
     
     dealer = Dealer([Player(player, Hand([Card(-1,'init'),Card(-1,'init')]), bankroll) for player in players_list], big_blind)
     dealer.distribute(shuffle = True)
 
-    list_board_card = [pygame.image.load("jeu/assets/images/card/card_back.png")] * 5
+    list_board_card = [pygame.image.load(resource_path("jeu/assets/images/card/card_back.png"))] * 5
     list_players = [player for player in dealer.players]
     list_players_font = [menu_font.get_font(50).render(player, True, "#EEEEEE") for player in players_list]
-    list_players_hand = [[pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[0].suit}/{player.hand.cards[0].value}.png"),pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[1].suit}/{player.hand.cards[1].value}.png")] for player in dealer.players]
+    list_players_hand = [[pygame.image.load(resource_path(f"jeu/assets/images/card/{player.hand.cards[0].suit}/{player.hand.cards[0].value}.png")),pygame.image.load(resource_path(f"jeu/assets/images/card/{player.hand.cards[1].suit}/{player.hand.cards[1].value}.png"))] for player in dealer.players]
     
     list_players[current_dealer].bankroll.bankroll -= int(big_blind / 2)
     list_players[who_next_dealer()].bankroll.bankroll -= big_blind
     
     # <----- BOARD CHIP ----->
     
-    board_chip: pygame.surface.Surface = pygame.image.load("jeu/assets/images/chip.png")
+    board_chip: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/chip.png"))
     rect_board_chip: pygame.rect.Rect = board_chip.get_rect(center = (1280 / 2 + 350, 720 / 2))
     
     text_current_blind: pygame.surface.Surface = menu_font.get_font(25).render('Current Blind:', True, "#EEEEEE")
@@ -121,10 +121,10 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     rect_card_j1_1: pygame.rect.Rect = list_players_hand[current_player][0].get_rect(center = (1280 / 2 - 75, 720 - 65))
     rect_card_j1_2: pygame.rect.Rect = list_players_hand[current_player][1].get_rect(center = (1280 / 2 + 75, 720 - 65))
     
-    dealer_token_j1: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Dealer_Token.png")
+    dealer_token_j1: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/Dealer_Token.png"))
     rect_j1_dealer: pygame.rect.Rect = dealer_token_j1.get_rect(center = (1280 / 2 - 225, 720 - 75))
     
-    bankroll_j1: pygame.surface.Surface = pygame.image.load("jeu/assets/images/chip.png")
+    bankroll_j1: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/chip.png"))
     rect_bankroll_j1: pygame.rect.Rect = bankroll_j1.get_rect(center = (1280 / 2 + 225, 720 - 75))
     
     
@@ -135,40 +135,40 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     text_j2: pygame.surface.Surface = list_players_font[who_next_player()]
     rect_j2: pygame.rect.Rect = text_j2.get_rect(center = (1280 - 175, 720 - 675))
     
-    card_j2_1: pygame.surface.Surface = pygame.image.load("jeu/assets/images/card/card_back.png")
+    card_j2_1: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/card/card_back.png"))
     rect_card_j2_1: pygame.rect.Rect = card_j2_1.get_rect(center = (1280 / 2 - 75, 65))
-    card_j2_2: pygame.surface.Surface = pygame.image.load("jeu/assets/images/card/card_back.png")
+    card_j2_2: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/card/card_back.png"))
     rect_card_j2_2: pygame.rect.Rect = card_j2_2.get_rect(center = (1280 / 2 + 75, 65))
     
-    dealer_token_2: pygame.surface.Surface = pygame.image.load("jeu/assets/images/Dealer_Token.png")
+    dealer_token_2: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/Dealer_Token.png"))
     rect_j2_token: pygame.rect.Rect = dealer_token_2.get_rect(center = (1280 / 2 + 225, 75))
     
-    bankroll_j2: pygame.surface.Surface = pygame.image.load("jeu/assets/images/chip.png")
+    bankroll_j2: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/chip.png"))
     rect_bankroll_j2: pygame.rect.Rect = bankroll_j2.get_rect(center = (1280 / 2 - 225, 75))
     
     players_token_rect.append((dealer_token_2, rect_j2_token))
     
     # <-----  Table ----->
     
-    table: pygame.surface.Surface = pygame.image.load("jeu/assets/images/poker_table.jpg")
+    table: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/poker_table.jpg"))
     rect_table: pygame.rect.Rect = table.get_rect(center = (1280 / 2, 720 / 2))
     
     # <----- REVEAL FLOP ----->
     
     def reveal_flop() -> None:
-        list_board_card[0] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[0].suit}/{dealer.board.cards[0].value}.png")
-        list_board_card[1] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[1].suit}/{dealer.board.cards[1].value}.png")
-        list_board_card[2] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[2].suit}/{dealer.board.cards[2].value}.png")
+        list_board_card[0] = pygame.image.load(resource_path(f"jeu/assets/images/card/{dealer.board.cards[0].suit}/{dealer.board.cards[0].value}.png"))
+        list_board_card[1] = pygame.image.load(resource_path(f"jeu/assets/images/card/{dealer.board.cards[1].suit}/{dealer.board.cards[1].value}.png"))
+        list_board_card[2] = pygame.image.load(resource_path(f"jeu/assets/images/card/{dealer.board.cards[2].suit}/{dealer.board.cards[2].value}.png"))
     
     # <----- REVEAL TURN ----->
     
     def reveal_turn() -> None:
-        list_board_card[3] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[3].suit}/{dealer.board.cards[3].value}.png")
+        list_board_card[3] = pygame.image.load(resource_path(f"jeu/assets/images/card/{dealer.board.cards[3].suit}/{dealer.board.cards[3].value}.png"))
         
     # <----- REVEAL RIVER ----->
     
     def reveal_river() -> None:
-        list_board_card[4] = pygame.image.load(f"jeu/assets/images/card/{dealer.board.cards[4].suit}/{dealer.board.cards[4].value}.png")
+        list_board_card[4] = pygame.image.load(resource_path(f"jeu/assets/images/card/{dealer.board.cards[4].suit}/{dealer.board.cards[4].value}.png"))
         
     # <----- Raise Popup ----->
     
@@ -190,8 +190,6 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
         global text_chip_value
         global rect_chip_value
         global dealer
-        print(dealer.big_blind)
-        print(bet_textbox.text)
         if bet_textbox.text != '':
             if bet_textbox.text != None and int(bet_textbox.text) <= list_players[current_player].bankroll.bankroll:
                 if (int(bet_textbox.text) >= dealer.blind * 2):
@@ -202,7 +200,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
                     dealer.players[current_player].action = 'raise'
     
                     bet_popup.active = False
-    
+
                     swap_player()
         bet_textbox.text = ''
     
@@ -217,7 +215,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
       
     done_button = Button(
         screen = bet_popup.surface,
-        image = pygame.image.load("jeu/assets/images/Play Rect.png"),
+        image = pygame.image.load(resource_path("jeu/assets/images/Play Rect.png")),
         position = (bet_popup.surface.get_size()[0] // 2, bet_popup.surface.get_size()[1] // 2 + 100),
         text = "Done",
         font = bet_font.get_font(30),
@@ -296,7 +294,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     
     check_button = Button(
         screen=screen,
-        image=pygame.image.load("jeu/assets/images/Play Rect.png"),
+        image=pygame.image.load(resource_path("jeu/assets/images/Play Rect.png")),
         position=(1280 - 82, 720 / 2 - 90),
         text="Check",
         font=menu_font.get_font(30),
@@ -310,7 +308,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     
     bet_button = Button(
         screen=screen,
-        image=pygame.image.load("jeu/assets/images/Play Rect.png"),
+        image=pygame.image.load(resource_path("jeu/assets/images/Play Rect.png")),
         position=(1280 - 83, 720 / 2 - 30),
         text="Raise",
         font=menu_font.get_font(30),
@@ -324,7 +322,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     
     all_in_button = Button(
         screen=screen,
-        image=pygame.image.load("jeu/assets/images/Play Rect.png"),
+        image=pygame.image.load(resource_path("jeu/assets/images/Play Rect.png")),
         position=(1280 - 83, 720 / 2 + 30),
         text="Call",
         font=menu_font.get_font(30),
@@ -338,7 +336,7 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
     
     fold_button = Button(
         screen=screen,
-        image=pygame.image.load("jeu/assets/images/Play Rect.png"),
+        image=pygame.image.load(resource_path("jeu/assets/images/Play Rect.png")),
         position=(1280 - 83, 720 / 2 + 90),
         text="Fold",
         font=menu_font.get_font(30),
@@ -497,8 +495,8 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
         if end_turn:
             
             dealer.distribute(shuffle = True)
-            list_players_hand = [[pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[0].suit}/{player.hand.cards[0].value}.png"),pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[1].suit}/{player.hand.cards[1].value}.png")] for player in dealer.players]
-            list_board_card = [pygame.image.load("jeu/assets/images/card/card_back.png")] * 5
+            list_players_hand = [[pygame.image.load(resource_path(f"jeu/assets/images/card/{player.hand.cards[0].suit}/{player.hand.cards[0].value}.png")),pygame.image.load(resource_path(f"jeu/assets/images/card/{player.hand.cards[1].suit}/{player.hand.cards[1].value}.png"))] for player in dealer.players]
+            list_board_card = [pygame.image.load(resource_path("jeu/assets/images/card/card_back.png"))] * 5
             next_dealer()
             if current_dealer != current_dealer: swap_player()
             dealer.blind = 0
