@@ -15,12 +15,14 @@ class Dealer:
 
     # <----- init ----->
 
-    def __init__(self: Dealer, players: list[Player]) -> None:
+    def __init__(self: Dealer, players: list[Player], big_blind: int) -> None:
+
         self.__deck: Deck = Deck()
         self.__players: list[Player] = players.copy()
         self.__board: Board = Board([])
-        self.__blind: int = 0
-        self.__total_blind: int = 0
+        self.__blind: int = big_blind
+        self.__total_blind: int = big_blind + (big_blind // 2)
+        self.__big_blind: int = big_blind
 
     # <----- getter ----->
 
@@ -38,7 +40,13 @@ class Dealer:
 
     @property
     def total_blind(self: Dealer) -> int: return self.__total_blind
+    
+    @property
+    def big_blind(self: Dealer) -> int: return self.__big_blind
 
+    @property
+    def small_blind(self: Dealer) -> int: return self.__big_blind // 2
+    
     # <----- setter ----->
 
     @blind.setter
@@ -46,7 +54,17 @@ class Dealer:
 
     @total_blind.setter
     def total_blind(self: Dealer, new_total_blind: int) -> None: self.__total_blind = new_total_blind
+    
+    @big_blind.setter
+    def big_blind(self: Dealer, new_big_blind: int) -> None: self.__big_blind = new_big_blind
 
+    # <----- reset total blind ----->
+    
+    def reset_total_blind(self: Dealer) -> None:
+        self.__blind: int = self.__big_blind
+        self.__total_blind: int = self.__big_blind + (self.__big_blind // 2)
+        
+    
     # <----- distribute ----->
 
     def distribute(self: Dealer, shuffle: bool = False) -> None:
@@ -196,7 +214,6 @@ class Dealer:
             if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] > three_of_kind):
                 three_of_kind = tuple_card[0]
             elif tuple_card[1] == 2 and (pair == None or tuple_card[0] > pair):
-                print("pair")
                 pair = tuple_card[0]
 
         if three_of_kind != None and pair != None:

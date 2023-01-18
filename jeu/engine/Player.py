@@ -16,6 +16,7 @@ class Player:
         self.__bankroll: Bankroll = Bankroll(bankroll)
         self.__bet: int = 0
         self.__hand: Hand = hand
+        self.__action: str = ''
     
     # <----- getter -----> 
     
@@ -31,6 +32,9 @@ class Player:
     @property
     def hand(self: Player) -> Hand: return self.__hand
     
+    @property
+    def action(self: Player) -> str: return self.__action
+    
     # <----- setter ----->
     
     @name.setter
@@ -44,3 +48,6 @@ class Player:
     
     @hand.setter
     def hand(self: Player, new_hand: Hand) -> None: self.__hand = new_hand
+    
+    @action.setter
+    def action(self: Player, new_action: str) -> None: self.__action = new_action
