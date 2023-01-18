@@ -190,20 +190,21 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
         global text_chip_value
         global rect_chip_value
         global dealer
-        
+        print(dealer.big_blind)
+        print(bet_textbox.text)
         if bet_textbox.text != '':
-            if bet_textbox.text != None and int(bet_textbox.text) <= list_players[current_player].bankroll.bankroll and int(bet_textbox.text) >= dealer.blind:
-                if dealer.total_blind == big_blind and (int(bet_textbox.text) == big_blind or int(bet_textbox.text) >= big_blind * 2) or dealer.total_blind != big_blind:
+            if bet_textbox.text != None and int(bet_textbox.text) <= list_players[current_player].bankroll.bankroll:
+                if (int(bet_textbox.text) >= dealer.blind * 2):
                     list_players[current_player].bankroll.bankroll -= int(bet_textbox.text)
                     list_players[current_player].bet += int(bet_textbox.text)
                     dealer.blind = int(bet_textbox.text)
                     dealer.total_blind += int(bet_textbox.text) 
-                    bet_textbox.text = ''
                     dealer.players[current_player].action = 'raise'
     
                     bet_popup.active = False
     
                     swap_player()
+        bet_textbox.text = ''
     
     # <----- check handler -----> 
     
@@ -491,19 +492,9 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
         screen.blit(list_players_font[current_player], rect_j1)
         screen.blit(list_players_font[who_next_player()], rect_j2)
         
-        screen.blit(menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 + 225, 720 - 75)))
-        screen.blit(menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 - 225, 75)))
-        
-        for event in pygame.event.get():
-            match (event.type):
-                case pygame.QUIT: quit()
-        
-            for button in menu_buttons: button.update(event)  # type: ignore
-        for button in menu_buttons: button.update_render()
-        
         check_step()
         
-        if end_turn == True:
+        if end_turn:
             
             dealer.distribute(shuffle = True)
             list_players_hand = [[pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[0].suit}/{player.hand.cards[0].value}.png"),pygame.image.load(f"jeu/assets/images/card/{player.hand.cards[1].suit}/{player.hand.cards[1].value}.png")] for player in dealer.players]
@@ -528,8 +519,12 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
                 dealer.total_blind += list_players[who_next_dealer()].bankroll.bankroll
                 list_players[who_next_dealer()].bankroll.bankroll = 0 
             
-    
+            pygame.display.update()
+         
+        screen.blit(menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[current_player].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 + 225, 720 - 75)))
+        screen.blit(menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE"), menu_font.get_font(25).render(str(list_players[who_next_player()].bankroll.bankroll), True, "#EEEEEE").get_rect(center = (1280 / 2 - 225, 75)))   
             
+        if end_turn:
             step_one = True
             step_two = True
             step_three = True
@@ -572,7 +567,13 @@ def poker_table(screen: pygame.surface.Surface, players_list: list[str], bankrol
                     )
                     
                     end_popup.add_ui_element(end_popup_quit)
-                    pygame.display.update()
                     end_popup.run()
-                    
+        
+        for event in pygame.event.get():
+            match (event.type):
+                case pygame.QUIT: quit()
+        
+            for button in menu_buttons: button.update(event)  # type: ignore
+        for button in menu_buttons: button.update_render()
+        
         pygame.display.update()
