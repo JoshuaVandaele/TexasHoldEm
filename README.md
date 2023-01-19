@@ -1,6 +1,5 @@
 # SAE Texas HoldEm
 ## Contributeur
-
     - Vandaele Joshua
 
     - Bodart Jérémy
