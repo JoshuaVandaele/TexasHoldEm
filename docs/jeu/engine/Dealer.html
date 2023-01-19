@@ -1,0 +1,1793 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>jeu.engine.Dealer API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>jeu.engine.Dealer</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># &lt;========== import ==========&gt;
+
+from __future__ import annotations
+
+from jeu.engine.Card import Card
+from jeu.engine.Deck import Deck
+from jeu.engine.Player import Player
+from jeu.engine.Board import Board
+from jeu.engine.Hand import Hand
+
+# &lt;========= class ==========&gt;
+
+
+class Dealer:
+
+    # &lt;----- init -----&gt;
+
+    def __init__(self: Dealer, players: list[Player], big_blind: int) -&gt; None:
+
+        self.__deck: Deck = Deck()
+        self.__players: list[Player] = players.copy()
+        self.__board: Board = Board([])
+        self.__blind: int = 0
+        self.__total_blind: int = big_blind + (big_blind // 2)
+        self.__big_blind: int = big_blind
+
+    # &lt;----- getter -----&gt;
+
+    @property
+    def deck(self: Dealer) -&gt; Deck: return self.__deck
+
+    @property
+    def players(self: Dealer) -&gt; list[Player]: return self.__players
+
+    @property
+    def board(self: Dealer) -&gt; Board: return self.__board
+
+    @property
+    def blind(self: Dealer) -&gt; int: return self.__blind
+
+    @property
+    def total_blind(self: Dealer) -&gt; int: return self.__total_blind
+    
+    @property
+    def big_blind(self: Dealer) -&gt; int: return self.__big_blind
+
+    @property
+    def small_blind(self: Dealer) -&gt; int: return self.__big_blind // 2
+    
+    # &lt;----- setter -----&gt;
+
+    @blind.setter
+    def blind(self: Dealer, new_blind: int) -&gt; None: self.__blind = new_blind
+
+    @total_blind.setter
+    def total_blind(self: Dealer, new_total_blind: int) -&gt; None: self.__total_blind = new_total_blind
+    
+    @big_blind.setter
+    def big_blind(self: Dealer, new_big_blind: int) -&gt; None: self.__big_blind = new_big_blind
+
+    # &lt;----- reset total blind -----&gt;
+    
+    def reset_total_blind(self: Dealer) -&gt; None:
+        self.__blind: int = self.__big_blind
+        self.__total_blind: int = self.__big_blind + (self.__big_blind // 2)
+        
+    
+    # &lt;----- distribute -----&gt;
+
+    def distribute(self: Dealer, shuffle: bool = False) -&gt; None:
+        &#34;&#34;&#34; Distribute card with casino method
+
+        Args:
+            self (Dealer): self
+            shuffle (bool, optional):for shuffle or the deck when you use the function. Defaults to False.
+        &#34;&#34;&#34;
+        if shuffle:
+            self.__deck.reset_deck()
+            self.__deck.shuffle()
+
+        for player in self.__players:
+            player.hand.cards[0] = self.__deck.draw()
+            player.hand.cards[1] = self.__deck.draw()
+
+        self.__deck.burn()
+        self.__board.cards = [self.__deck.draw() for i in range(3)]
+        self.__deck.burn()
+        self.__board.cards.append(self.__deck.draw())
+        self.__deck.burn()
+        self.__board.cards.append(self.__deck.draw())
+
+    # &lt;----- is_royal_straight_flush-----&gt;
+
+    def is_royal_straight_flush(self: Dealer,  player_index: int) -&gt; bool:
+        &#34;&#34;&#34; Define if their have royal straight flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            bool: royal straight flush = True else False
+        &#34;&#34;&#34;
+        card_suit: list[str] = []
+        card_value: list[list[int]] = []
+
+        for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
+            if card.suit not in card_suit:
+                card_suit.append(card.suit)
+                card_value.append([card.value])
+            else:
+                card_value[card_suit.index(card.suit)].append(card.value)
+
+        for value in card_value:
+            if 1 in value and 13 in value and 12 in value and 11 in value and 10 in value:
+                return True
+
+        return False
+
+    # &lt;----- is_straight_flush -----&gt;
+
+    def is_straight_flush(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have straight flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have straight flush = True + hand composition or False in a list
+        &#34;&#34;&#34;
+        card_suit: list[str] = []
+        card_value: list[list[int]] = []
+
+        for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
+            if card.suit not in card_suit:
+                card_suit.append(card.suit)
+                card_value.append([card.value])
+            else:
+                card_value[card_suit.index(card.suit)].append(card.value)
+
+        compteur = 0
+        highest_value = None
+
+        for value in card_value:
+            if len(value) &gt; 4:
+                for i, card in enumerate(value):
+                    if 1 in value and 13 in value and 12 in value and 11 in value and 10 in value:
+                        return [True, 1]
+                    else:
+                        if i &lt; len(value) - 1:
+                            if card - 1 == value[i+1]:
+                                compteur += 1
+                            if highest_value == None:
+                                highest_value = card
+                        elif compteur &lt; 4:
+                            compteur = 0
+                            highest_value = None
+
+                if compteur &gt;= 4:
+                    return [True, highest_value]
+
+        return [False]
+
+    # &lt;----- is_four_of_kind -----&gt;
+
+    def is_four_of_kind(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have four of kind
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have four of kind = True + hand composition or False in a list
+        &#34;&#34;&#34;
+        cards: list[Card] = [card for card in (
+            self.__board.cards + self.__players[player_index].hand.cards)]
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        four_of_kind: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 4:
+                four_of_kind = tuple_card[0]
+                del occurence[occurence.index(tuple_card)]
+
+        if four_of_kind != None:
+            if isinstance(occurence[0], tuple):
+                return [True, four_of_kind, occurence[0][0]]
+            return [True, four_of_kind, occurence[0]]
+        return [False]
+
+    # &lt;----- is_full_house -----&gt;
+
+    def is_full_house(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have full house
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have full house = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+        occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        three_of_kind: int | None = None
+        pair: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] &gt; three_of_kind):
+                three_of_kind = tuple_card[0]
+            elif tuple_card[1] == 2 and (pair == None or tuple_card[0] &gt; pair):
+                pair = tuple_card[0]
+
+        if three_of_kind != None and pair != None:
+            return [True, three_of_kind, pair]
+        return [False]
+
+    # &lt;----- is_flush -----&gt;
+
+    def is_flush(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have flush = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+        cards.sort(reverse=True)
+
+        suit: list[str] = []
+        value: list[list[int]] = []
+
+        for card in cards:
+            if card.suit not in suit:
+                suit.append(card.suit)
+                value.append([card.value])
+            else:
+                value[suit.index(card.suit)].append(card.value)
+
+        for v in value:
+            if len(v) &gt;= 5:
+                return [True, v[0]]
+        return [False]
+
+    # &lt;----- is_straight -----&gt;
+
+    def is_straight(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have straight
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have straight = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[int] = [card.value for card in (
+            self.__board.cards + self.__players[player_index].hand.cards)]
+        cards.sort(reverse=True)
+
+        if 1 in cards and 13 in cards and 12 in cards and 11 in cards and 10 in cards:
+            return [True, 1]
+
+        compteur: int = 0
+        highest_value: int | None = None
+
+        for i, card in enumerate(cards):
+
+            if i &lt; len(cards) - 1:
+                if card - 1 == cards[i+1]:
+                    compteur += 1
+                    if highest_value == None:
+                        highest_value = card
+                else:
+                    compteur = 0
+                    highest_value = None
+
+        if compteur &gt;= 4:
+            return [True, highest_value]
+        return [False]
+
+    # &lt;----- is_three_of_kind -----&gt;
+
+    def is_tree_of_kind(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have tree of kind
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have tree of kind = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = self.__board.cards + \
+            self.__players[player_index].hand.cards
+
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+        three_of_kind: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] &gt; three_of_kind):
+                three_of_kind = tuple_card[0]
+                del occurence[occurence.index(tuple_card)]
+
+        if three_of_kind != None:
+            return [True, three_of_kind, occurence[0][0], occurence[1][0]]
+        else:
+            return [False]
+
+    # &lt;----- is_two_pairs-----&gt;
+
+    def is_two_pairs(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have two pairs
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have two pairs = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = self.__board.cards + \
+            self.__players[player_index].hand.cards
+
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        pair: list[int] = []
+        to_del: list[tuple[int, int]] = []
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 2:
+                pair.append(tuple_card[0])
+                to_del.append(tuple_card)
+
+        for value in to_del:
+            occurence[occurence.index(value)]
+
+        if len(pair) &gt;= 2:
+            return [True, pair[0], pair[1], occurence[0][0]]
+        else:
+            return [False]
+
+    # &lt;----- is_one_pair -----&gt;
+
+    def is_one_pair(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have one pair
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have one pair = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = self.__board.cards + \
+            self.__players[player_index].hand.cards
+
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        pair: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 2 and (pair == None or tuple_card[0] &gt; pair):
+                pair = tuple_card[0]
+                del occurence[occurence.index(tuple_card)]
+
+        if pair != None:
+            return [True, pair, occurence[0][0], occurence[1][0], occurence[2][0]]
+        else:
+            return [False]
+
+    def is_highest_card(self: Dealer, player_index: int) -&gt; list[int]:
+        &#34;&#34;&#34;define the hand if you doesn&#39;t have combination
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list[int]: the hand composition
+        &#34;&#34;&#34;
+        cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
+        cards.sort(reverse=True)
+        while cards[-1] == 1:
+            cards.insert(0, 1)
+            del cards[-1]
+
+        return [cards[0], cards[1], cards[2], cards[3], cards[4]]
+
+    # &lt;----- get_best_combination -----&gt;
+
+    def get_best_combination(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34;define the best combination
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: list compose by hand power + hand composition
+        &#34;&#34;&#34;
+
+        if self.is_royal_straight_flush(player_index):
+            return [10]
+
+        elif self.is_straight_flush(player_index)[0]:
+            return [9] + self.is_straight_flush(player_index)[1:]
+
+        elif self.is_four_of_kind(player_index)[0]:
+            return [5] + self.is_four_of_kind(player_index)[1:]
+
+        elif self.is_full_house(player_index)[0]:
+            return [7] + self.is_straight(player_index)[1:]
+
+        elif self.is_flush(player_index)[0]:
+            return [6] + self.is_flush(player_index)[1:]
+
+        elif self.is_straight(player_index)[0]:
+            return [5] + self.is_straight(player_index)[1:]
+
+        elif self.is_tree_of_kind(player_index)[0]:
+            return [4] + self.is_tree_of_kind(player_index)[1:]
+
+        elif self.is_two_pairs(player_index)[0]:
+            return [3] + self.is_two_pairs(player_index)[1:]
+
+        elif self.is_one_pair(player_index)[0]:
+            return [2] + self.is_one_pair(player_index)[1:]
+
+        else:
+            return [1] + self.is_highest_card(player_index)
+
+    # &lt;----- compare_hand -----&gt;
+
+    def compare_hand(self: Dealer, player1_index: int, player2_index: int) -&gt; int:
+        &#34;&#34;&#34;compare two hand
+
+        Args:
+            self (Dealer): self
+            player1_index (int): player 1 you want to check
+            player2_index (int): player 2 you want to check
+
+        Returns:
+            int: return the index of the best player hand or -1 if their are equals
+        &#34;&#34;&#34;
+        player_1: list = self.get_best_combination(player1_index)
+        player_2: list = self.get_best_combination(player2_index)
+
+        for value_p1, value_p2 in zip(player_1, player_2):
+            if value_p1 &lt; value_p2:
+                return player1_index
+            elif value_p1 &gt; value_p2:
+                return player2_index
+
+        return -1
+
+
+if __name__ == &#34;__main__&#34;:
+    h: Hand = Hand([Card(2, &#39;nuke&#39;), Card(2, &#39;nuke&#39;)])
+    b: Board = Board([Card(1, &#39;spade&#39;), Card(13, &#39;spade&#39;), Card(
+        12, &#39;spade&#39;), Card(11, &#39;spade&#39;), Card(10, &#39;spade&#39;)])
+    p: Player = Player(&#39;silver&#39;, 1, h)
+    d: Dealer = Dealer(Deck(), [p], b)
+
+    print(d.is_royal_straight_flush(0))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="jeu.engine.Dealer.Dealer"><code class="flex name class">
+<span>class <span class="ident">Dealer</span></span>
+<span>(</span><span>players: list[Player], big_blind: int)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Dealer:
+
+    # &lt;----- init -----&gt;
+
+    def __init__(self: Dealer, players: list[Player], big_blind: int) -&gt; None:
+
+        self.__deck: Deck = Deck()
+        self.__players: list[Player] = players.copy()
+        self.__board: Board = Board([])
+        self.__blind: int = 0
+        self.__total_blind: int = big_blind + (big_blind // 2)
+        self.__big_blind: int = big_blind
+
+    # &lt;----- getter -----&gt;
+
+    @property
+    def deck(self: Dealer) -&gt; Deck: return self.__deck
+
+    @property
+    def players(self: Dealer) -&gt; list[Player]: return self.__players
+
+    @property
+    def board(self: Dealer) -&gt; Board: return self.__board
+
+    @property
+    def blind(self: Dealer) -&gt; int: return self.__blind
+
+    @property
+    def total_blind(self: Dealer) -&gt; int: return self.__total_blind
+    
+    @property
+    def big_blind(self: Dealer) -&gt; int: return self.__big_blind
+
+    @property
+    def small_blind(self: Dealer) -&gt; int: return self.__big_blind // 2
+    
+    # &lt;----- setter -----&gt;
+
+    @blind.setter
+    def blind(self: Dealer, new_blind: int) -&gt; None: self.__blind = new_blind
+
+    @total_blind.setter
+    def total_blind(self: Dealer, new_total_blind: int) -&gt; None: self.__total_blind = new_total_blind
+    
+    @big_blind.setter
+    def big_blind(self: Dealer, new_big_blind: int) -&gt; None: self.__big_blind = new_big_blind
+
+    # &lt;----- reset total blind -----&gt;
+    
+    def reset_total_blind(self: Dealer) -&gt; None:
+        self.__blind: int = self.__big_blind
+        self.__total_blind: int = self.__big_blind + (self.__big_blind // 2)
+        
+    
+    # &lt;----- distribute -----&gt;
+
+    def distribute(self: Dealer, shuffle: bool = False) -&gt; None:
+        &#34;&#34;&#34; Distribute card with casino method
+
+        Args:
+            self (Dealer): self
+            shuffle (bool, optional):for shuffle or the deck when you use the function. Defaults to False.
+        &#34;&#34;&#34;
+        if shuffle:
+            self.__deck.reset_deck()
+            self.__deck.shuffle()
+
+        for player in self.__players:
+            player.hand.cards[0] = self.__deck.draw()
+            player.hand.cards[1] = self.__deck.draw()
+
+        self.__deck.burn()
+        self.__board.cards = [self.__deck.draw() for i in range(3)]
+        self.__deck.burn()
+        self.__board.cards.append(self.__deck.draw())
+        self.__deck.burn()
+        self.__board.cards.append(self.__deck.draw())
+
+    # &lt;----- is_royal_straight_flush-----&gt;
+
+    def is_royal_straight_flush(self: Dealer,  player_index: int) -&gt; bool:
+        &#34;&#34;&#34; Define if their have royal straight flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            bool: royal straight flush = True else False
+        &#34;&#34;&#34;
+        card_suit: list[str] = []
+        card_value: list[list[int]] = []
+
+        for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
+            if card.suit not in card_suit:
+                card_suit.append(card.suit)
+                card_value.append([card.value])
+            else:
+                card_value[card_suit.index(card.suit)].append(card.value)
+
+        for value in card_value:
+            if 1 in value and 13 in value and 12 in value and 11 in value and 10 in value:
+                return True
+
+        return False
+
+    # &lt;----- is_straight_flush -----&gt;
+
+    def is_straight_flush(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have straight flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have straight flush = True + hand composition or False in a list
+        &#34;&#34;&#34;
+        card_suit: list[str] = []
+        card_value: list[list[int]] = []
+
+        for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
+            if card.suit not in card_suit:
+                card_suit.append(card.suit)
+                card_value.append([card.value])
+            else:
+                card_value[card_suit.index(card.suit)].append(card.value)
+
+        compteur = 0
+        highest_value = None
+
+        for value in card_value:
+            if len(value) &gt; 4:
+                for i, card in enumerate(value):
+                    if 1 in value and 13 in value and 12 in value and 11 in value and 10 in value:
+                        return [True, 1]
+                    else:
+                        if i &lt; len(value) - 1:
+                            if card - 1 == value[i+1]:
+                                compteur += 1
+                            if highest_value == None:
+                                highest_value = card
+                        elif compteur &lt; 4:
+                            compteur = 0
+                            highest_value = None
+
+                if compteur &gt;= 4:
+                    return [True, highest_value]
+
+        return [False]
+
+    # &lt;----- is_four_of_kind -----&gt;
+
+    def is_four_of_kind(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have four of kind
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have four of kind = True + hand composition or False in a list
+        &#34;&#34;&#34;
+        cards: list[Card] = [card for card in (
+            self.__board.cards + self.__players[player_index].hand.cards)]
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        four_of_kind: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 4:
+                four_of_kind = tuple_card[0]
+                del occurence[occurence.index(tuple_card)]
+
+        if four_of_kind != None:
+            if isinstance(occurence[0], tuple):
+                return [True, four_of_kind, occurence[0][0]]
+            return [True, four_of_kind, occurence[0]]
+        return [False]
+
+    # &lt;----- is_full_house -----&gt;
+
+    def is_full_house(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have full house
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have full house = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+        occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        three_of_kind: int | None = None
+        pair: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] &gt; three_of_kind):
+                three_of_kind = tuple_card[0]
+            elif tuple_card[1] == 2 and (pair == None or tuple_card[0] &gt; pair):
+                pair = tuple_card[0]
+
+        if three_of_kind != None and pair != None:
+            return [True, three_of_kind, pair]
+        return [False]
+
+    # &lt;----- is_flush -----&gt;
+
+    def is_flush(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have flush
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have flush = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+        cards.sort(reverse=True)
+
+        suit: list[str] = []
+        value: list[list[int]] = []
+
+        for card in cards:
+            if card.suit not in suit:
+                suit.append(card.suit)
+                value.append([card.value])
+            else:
+                value[suit.index(card.suit)].append(card.value)
+
+        for v in value:
+            if len(v) &gt;= 5:
+                return [True, v[0]]
+        return [False]
+
+    # &lt;----- is_straight -----&gt;
+
+    def is_straight(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have straight
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have straight = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[int] = [card.value for card in (
+            self.__board.cards + self.__players[player_index].hand.cards)]
+        cards.sort(reverse=True)
+
+        if 1 in cards and 13 in cards and 12 in cards and 11 in cards and 10 in cards:
+            return [True, 1]
+
+        compteur: int = 0
+        highest_value: int | None = None
+
+        for i, card in enumerate(cards):
+
+            if i &lt; len(cards) - 1:
+                if card - 1 == cards[i+1]:
+                    compteur += 1
+                    if highest_value == None:
+                        highest_value = card
+                else:
+                    compteur = 0
+                    highest_value = None
+
+        if compteur &gt;= 4:
+            return [True, highest_value]
+        return [False]
+
+    # &lt;----- is_three_of_kind -----&gt;
+
+    def is_tree_of_kind(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have tree of kind
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have tree of kind = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = self.__board.cards + \
+            self.__players[player_index].hand.cards
+
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+        three_of_kind: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] &gt; three_of_kind):
+                three_of_kind = tuple_card[0]
+                del occurence[occurence.index(tuple_card)]
+
+        if three_of_kind != None:
+            return [True, three_of_kind, occurence[0][0], occurence[1][0]]
+        else:
+            return [False]
+
+    # &lt;----- is_two_pairs-----&gt;
+
+    def is_two_pairs(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have two pairs
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have two pairs = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = self.__board.cards + \
+            self.__players[player_index].hand.cards
+
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        pair: list[int] = []
+        to_del: list[tuple[int, int]] = []
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 2:
+                pair.append(tuple_card[0])
+                to_del.append(tuple_card)
+
+        for value in to_del:
+            occurence[occurence.index(value)]
+
+        if len(pair) &gt;= 2:
+            return [True, pair[0], pair[1], occurence[0][0]]
+        else:
+            return [False]
+
+    # &lt;----- is_one_pair -----&gt;
+
+    def is_one_pair(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34; Define if their have one pair
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: if their have one pair = True + hand composition or False in a list
+        &#34;&#34;&#34;
+
+        cards: list[Card] = self.__board.cards + \
+            self.__players[player_index].hand.cards
+
+        occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+        pair: int | None = None
+
+        for tuple_card in occurence:
+            if tuple_card[1] == 2 and (pair == None or tuple_card[0] &gt; pair):
+                pair = tuple_card[0]
+                del occurence[occurence.index(tuple_card)]
+
+        if pair != None:
+            return [True, pair, occurence[0][0], occurence[1][0], occurence[2][0]]
+        else:
+            return [False]
+
+    def is_highest_card(self: Dealer, player_index: int) -&gt; list[int]:
+        &#34;&#34;&#34;define the hand if you doesn&#39;t have combination
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list[int]: the hand composition
+        &#34;&#34;&#34;
+        cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
+        cards.sort(reverse=True)
+        while cards[-1] == 1:
+            cards.insert(0, 1)
+            del cards[-1]
+
+        return [cards[0], cards[1], cards[2], cards[3], cards[4]]
+
+    # &lt;----- get_best_combination -----&gt;
+
+    def get_best_combination(self: Dealer, player_index: int) -&gt; list:
+        &#34;&#34;&#34;define the best combination
+
+        Args:
+            self (Dealer): self
+            player_index (int): index for the hand you want to check
+
+        Returns:
+            list: list compose by hand power + hand composition
+        &#34;&#34;&#34;
+
+        if self.is_royal_straight_flush(player_index):
+            return [10]
+
+        elif self.is_straight_flush(player_index)[0]:
+            return [9] + self.is_straight_flush(player_index)[1:]
+
+        elif self.is_four_of_kind(player_index)[0]:
+            return [5] + self.is_four_of_kind(player_index)[1:]
+
+        elif self.is_full_house(player_index)[0]:
+            return [7] + self.is_straight(player_index)[1:]
+
+        elif self.is_flush(player_index)[0]:
+            return [6] + self.is_flush(player_index)[1:]
+
+        elif self.is_straight(player_index)[0]:
+            return [5] + self.is_straight(player_index)[1:]
+
+        elif self.is_tree_of_kind(player_index)[0]:
+            return [4] + self.is_tree_of_kind(player_index)[1:]
+
+        elif self.is_two_pairs(player_index)[0]:
+            return [3] + self.is_two_pairs(player_index)[1:]
+
+        elif self.is_one_pair(player_index)[0]:
+            return [2] + self.is_one_pair(player_index)[1:]
+
+        else:
+            return [1] + self.is_highest_card(player_index)
+
+    # &lt;----- compare_hand -----&gt;
+
+    def compare_hand(self: Dealer, player1_index: int, player2_index: int) -&gt; int:
+        &#34;&#34;&#34;compare two hand
+
+        Args:
+            self (Dealer): self
+            player1_index (int): player 1 you want to check
+            player2_index (int): player 2 you want to check
+
+        Returns:
+            int: return the index of the best player hand or -1 if their are equals
+        &#34;&#34;&#34;
+        player_1: list = self.get_best_combination(player1_index)
+        player_2: list = self.get_best_combination(player2_index)
+
+        for value_p1, value_p2 in zip(player_1, player_2):
+            if value_p1 &lt; value_p2:
+                return player1_index
+            elif value_p1 &gt; value_p2:
+                return player2_index
+
+        return -1</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="jeu.engine.Dealer.Dealer.big_blind"><code class="name">var <span class="ident">big_blind</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def big_blind(self: Dealer) -&gt; int: return self.__big_blind</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.blind"><code class="name">var <span class="ident">blind</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def blind(self: Dealer) -&gt; int: return self.__blind</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.board"><code class="name">var <span class="ident">board</span> : <a title="jeu.engine.Board.Board" href="Board.html#jeu.engine.Board.Board">Board</a></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def board(self: Dealer) -&gt; Board: return self.__board</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.deck"><code class="name">var <span class="ident">deck</span> : <a title="jeu.engine.Deck.Deck" href="Deck.html#jeu.engine.Deck.Deck">Deck</a></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def deck(self: Dealer) -&gt; Deck: return self.__deck</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.players"><code class="name">var <span class="ident">players</span> : list[<a title="jeu.engine.Player.Player" href="Player.html#jeu.engine.Player.Player">Player</a>]</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def players(self: Dealer) -&gt; list[Player]: return self.__players</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.small_blind"><code class="name">var <span class="ident">small_blind</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def small_blind(self: Dealer) -&gt; int: return self.__big_blind // 2</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.total_blind"><code class="name">var <span class="ident">total_blind</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def total_blind(self: Dealer) -&gt; int: return self.__total_blind</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="jeu.engine.Dealer.Dealer.compare_hand"><code class="name flex">
+<span>def <span class="ident">compare_hand</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player1_index: int, player2_index: int) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>compare two hand</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player1_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>player 1 you want to check</dd>
+<dt><strong><code>player2_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>player 2 you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>return the index of the best player hand or -1 if their are equals</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compare_hand(self: Dealer, player1_index: int, player2_index: int) -&gt; int:
+    &#34;&#34;&#34;compare two hand
+
+    Args:
+        self (Dealer): self
+        player1_index (int): player 1 you want to check
+        player2_index (int): player 2 you want to check
+
+    Returns:
+        int: return the index of the best player hand or -1 if their are equals
+    &#34;&#34;&#34;
+    player_1: list = self.get_best_combination(player1_index)
+    player_2: list = self.get_best_combination(player2_index)
+
+    for value_p1, value_p2 in zip(player_1, player_2):
+        if value_p1 &lt; value_p2:
+            return player1_index
+        elif value_p1 &gt; value_p2:
+            return player2_index
+
+    return -1</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.distribute"><code class="name flex">
+<span>def <span class="ident">distribute</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, shuffle: bool = False) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Distribute card with casino method</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+</dl>
+<p>shuffle (bool, optional):for shuffle or the deck when you use the function. Defaults to False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def distribute(self: Dealer, shuffle: bool = False) -&gt; None:
+    &#34;&#34;&#34; Distribute card with casino method
+
+    Args:
+        self (Dealer): self
+        shuffle (bool, optional):for shuffle or the deck when you use the function. Defaults to False.
+    &#34;&#34;&#34;
+    if shuffle:
+        self.__deck.reset_deck()
+        self.__deck.shuffle()
+
+    for player in self.__players:
+        player.hand.cards[0] = self.__deck.draw()
+        player.hand.cards[1] = self.__deck.draw()
+
+    self.__deck.burn()
+    self.__board.cards = [self.__deck.draw() for i in range(3)]
+    self.__deck.burn()
+    self.__board.cards.append(self.__deck.draw())
+    self.__deck.burn()
+    self.__board.cards.append(self.__deck.draw())</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.get_best_combination"><code class="name flex">
+<span>def <span class="ident">get_best_combination</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>define the best combination</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>list compose by hand power + hand composition</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_best_combination(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34;define the best combination
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: list compose by hand power + hand composition
+    &#34;&#34;&#34;
+
+    if self.is_royal_straight_flush(player_index):
+        return [10]
+
+    elif self.is_straight_flush(player_index)[0]:
+        return [9] + self.is_straight_flush(player_index)[1:]
+
+    elif self.is_four_of_kind(player_index)[0]:
+        return [5] + self.is_four_of_kind(player_index)[1:]
+
+    elif self.is_full_house(player_index)[0]:
+        return [7] + self.is_straight(player_index)[1:]
+
+    elif self.is_flush(player_index)[0]:
+        return [6] + self.is_flush(player_index)[1:]
+
+    elif self.is_straight(player_index)[0]:
+        return [5] + self.is_straight(player_index)[1:]
+
+    elif self.is_tree_of_kind(player_index)[0]:
+        return [4] + self.is_tree_of_kind(player_index)[1:]
+
+    elif self.is_two_pairs(player_index)[0]:
+        return [3] + self.is_two_pairs(player_index)[1:]
+
+    elif self.is_one_pair(player_index)[0]:
+        return [2] + self.is_one_pair(player_index)[1:]
+
+    else:
+        return [1] + self.is_highest_card(player_index)</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_flush"><code class="name flex">
+<span>def <span class="ident">is_flush</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have flush</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have flush = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_flush(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have flush
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have flush = True + hand composition or False in a list
+    &#34;&#34;&#34;
+
+    cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+    cards.sort(reverse=True)
+
+    suit: list[str] = []
+    value: list[list[int]] = []
+
+    for card in cards:
+        if card.suit not in suit:
+            suit.append(card.suit)
+            value.append([card.value])
+        else:
+            value[suit.index(card.suit)].append(card.value)
+
+    for v in value:
+        if len(v) &gt;= 5:
+            return [True, v[0]]
+    return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_four_of_kind"><code class="name flex">
+<span>def <span class="ident">is_four_of_kind</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have four of kind</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have four of kind = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_four_of_kind(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have four of kind
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have four of kind = True + hand composition or False in a list
+    &#34;&#34;&#34;
+    cards: list[Card] = [card for card in (
+        self.__board.cards + self.__players[player_index].hand.cards)]
+    occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+    four_of_kind: int | None = None
+
+    for tuple_card in occurence:
+        if tuple_card[1] == 4:
+            four_of_kind = tuple_card[0]
+            del occurence[occurence.index(tuple_card)]
+
+    if four_of_kind != None:
+        if isinstance(occurence[0], tuple):
+            return [True, four_of_kind, occurence[0][0]]
+        return [True, four_of_kind, occurence[0]]
+    return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_full_house"><code class="name flex">
+<span>def <span class="ident">is_full_house</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have full house</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have full house = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_full_house(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have full house
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have full house = True + hand composition or False in a list
+    &#34;&#34;&#34;
+
+    cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+    occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
+
+    three_of_kind: int | None = None
+    pair: int | None = None
+
+    for tuple_card in occurence:
+        if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] &gt; three_of_kind):
+            three_of_kind = tuple_card[0]
+        elif tuple_card[1] == 2 and (pair == None or tuple_card[0] &gt; pair):
+            pair = tuple_card[0]
+
+    if three_of_kind != None and pair != None:
+        return [True, three_of_kind, pair]
+    return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_highest_card"><code class="name flex">
+<span>def <span class="ident">is_highest_card</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>define the hand if you doesn't have combination</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list[int]</code></dt>
+<dd>the hand composition</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_highest_card(self: Dealer, player_index: int) -&gt; list[int]:
+    &#34;&#34;&#34;define the hand if you doesn&#39;t have combination
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list[int]: the hand composition
+    &#34;&#34;&#34;
+    cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
+    cards.sort(reverse=True)
+    while cards[-1] == 1:
+        cards.insert(0, 1)
+        del cards[-1]
+
+    return [cards[0], cards[1], cards[2], cards[3], cards[4]]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_one_pair"><code class="name flex">
+<span>def <span class="ident">is_one_pair</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have one pair</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have one pair = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_one_pair(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have one pair
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have one pair = True + hand composition or False in a list
+    &#34;&#34;&#34;
+
+    cards: list[Card] = self.__board.cards + \
+        self.__players[player_index].hand.cards
+
+    occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+    pair: int | None = None
+
+    for tuple_card in occurence:
+        if tuple_card[1] == 2 and (pair == None or tuple_card[0] &gt; pair):
+            pair = tuple_card[0]
+            del occurence[occurence.index(tuple_card)]
+
+    if pair != None:
+        return [True, pair, occurence[0][0], occurence[1][0], occurence[2][0]]
+    else:
+        return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_royal_straight_flush"><code class="name flex">
+<span>def <span class="ident">is_royal_straight_flush</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have royal straight flush</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>royal straight flush = True else False</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_royal_straight_flush(self: Dealer,  player_index: int) -&gt; bool:
+    &#34;&#34;&#34; Define if their have royal straight flush
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        bool: royal straight flush = True else False
+    &#34;&#34;&#34;
+    card_suit: list[str] = []
+    card_value: list[list[int]] = []
+
+    for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
+        if card.suit not in card_suit:
+            card_suit.append(card.suit)
+            card_value.append([card.value])
+        else:
+            card_value[card_suit.index(card.suit)].append(card.value)
+
+    for value in card_value:
+        if 1 in value and 13 in value and 12 in value and 11 in value and 10 in value:
+            return True
+
+    return False</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_straight"><code class="name flex">
+<span>def <span class="ident">is_straight</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have straight</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have straight = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_straight(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have straight
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have straight = True + hand composition or False in a list
+    &#34;&#34;&#34;
+
+    cards: list[int] = [card.value for card in (
+        self.__board.cards + self.__players[player_index].hand.cards)]
+    cards.sort(reverse=True)
+
+    if 1 in cards and 13 in cards and 12 in cards and 11 in cards and 10 in cards:
+        return [True, 1]
+
+    compteur: int = 0
+    highest_value: int | None = None
+
+    for i, card in enumerate(cards):
+
+        if i &lt; len(cards) - 1:
+            if card - 1 == cards[i+1]:
+                compteur += 1
+                if highest_value == None:
+                    highest_value = card
+            else:
+                compteur = 0
+                highest_value = None
+
+    if compteur &gt;= 4:
+        return [True, highest_value]
+    return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_straight_flush"><code class="name flex">
+<span>def <span class="ident">is_straight_flush</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have straight flush</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have straight flush = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_straight_flush(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have straight flush
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have straight flush = True + hand composition or False in a list
+    &#34;&#34;&#34;
+    card_suit: list[str] = []
+    card_value: list[list[int]] = []
+
+    for card in sorted(self.__board.cards + self.__players[player_index].hand.cards, reverse=True):
+        if card.suit not in card_suit:
+            card_suit.append(card.suit)
+            card_value.append([card.value])
+        else:
+            card_value[card_suit.index(card.suit)].append(card.value)
+
+    compteur = 0
+    highest_value = None
+
+    for value in card_value:
+        if len(value) &gt; 4:
+            for i, card in enumerate(value):
+                if 1 in value and 13 in value and 12 in value and 11 in value and 10 in value:
+                    return [True, 1]
+                else:
+                    if i &lt; len(value) - 1:
+                        if card - 1 == value[i+1]:
+                            compteur += 1
+                        if highest_value == None:
+                            highest_value = card
+                    elif compteur &lt; 4:
+                        compteur = 0
+                        highest_value = None
+
+            if compteur &gt;= 4:
+                return [True, highest_value]
+
+    return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_tree_of_kind"><code class="name flex">
+<span>def <span class="ident">is_tree_of_kind</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have tree of kind</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have tree of kind = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_tree_of_kind(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have tree of kind
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have tree of kind = True + hand composition or False in a list
+    &#34;&#34;&#34;
+
+    cards: list[Card] = self.__board.cards + \
+        self.__players[player_index].hand.cards
+
+    occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+    three_of_kind: int | None = None
+
+    for tuple_card in occurence:
+        if tuple_card[1] == 3 and (three_of_kind == None or tuple_card[0] &gt; three_of_kind):
+            three_of_kind = tuple_card[0]
+            del occurence[occurence.index(tuple_card)]
+
+    if three_of_kind != None:
+        return [True, three_of_kind, occurence[0][0], occurence[1][0]]
+    else:
+        return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.is_two_pairs"><code class="name flex">
+<span>def <span class="ident">is_two_pairs</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>, player_index: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define if their have two pairs</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></dt>
+<dd>self</dd>
+<dt><strong><code>player_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>index for the hand you want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>if their have two pairs = True + hand composition or False in a list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_two_pairs(self: Dealer, player_index: int) -&gt; list:
+    &#34;&#34;&#34; Define if their have two pairs
+
+    Args:
+        self (Dealer): self
+        player_index (int): index for the hand you want to check
+
+    Returns:
+        list: if their have two pairs = True + hand composition or False in a list
+    &#34;&#34;&#34;
+
+    cards: list[Card] = self.__board.cards + \
+        self.__players[player_index].hand.cards
+
+    occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
+
+    pair: list[int] = []
+    to_del: list[tuple[int, int]] = []
+
+    for tuple_card in occurence:
+        if tuple_card[1] == 2:
+            pair.append(tuple_card[0])
+            to_del.append(tuple_card)
+
+    for value in to_del:
+        occurence[occurence.index(value)]
+
+    if len(pair) &gt;= 2:
+        return [True, pair[0], pair[1], occurence[0][0]]
+    else:
+        return [False]</code></pre>
+</details>
+</dd>
+<dt id="jeu.engine.Dealer.Dealer.reset_total_blind"><code class="name flex">
+<span>def <span class="ident">reset_total_blind</span></span>(<span>self: <a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_total_blind(self: Dealer) -&gt; None:
+    self.__blind: int = self.__big_blind
+    self.__total_blind: int = self.__big_blind + (self.__big_blind // 2)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="jeu.engine" href="index.html">jeu.engine</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="jeu.engine.Dealer.Dealer" href="#jeu.engine.Dealer.Dealer">Dealer</a></code></h4>
+<ul class="">
+<li><code><a title="jeu.engine.Dealer.Dealer.big_blind" href="#jeu.engine.Dealer.Dealer.big_blind">big_blind</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.blind" href="#jeu.engine.Dealer.Dealer.blind">blind</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.board" href="#jeu.engine.Dealer.Dealer.board">board</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.compare_hand" href="#jeu.engine.Dealer.Dealer.compare_hand">compare_hand</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.deck" href="#jeu.engine.Dealer.Dealer.deck">deck</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.distribute" href="#jeu.engine.Dealer.Dealer.distribute">distribute</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.get_best_combination" href="#jeu.engine.Dealer.Dealer.get_best_combination">get_best_combination</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_flush" href="#jeu.engine.Dealer.Dealer.is_flush">is_flush</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_four_of_kind" href="#jeu.engine.Dealer.Dealer.is_four_of_kind">is_four_of_kind</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_full_house" href="#jeu.engine.Dealer.Dealer.is_full_house">is_full_house</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_highest_card" href="#jeu.engine.Dealer.Dealer.is_highest_card">is_highest_card</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_one_pair" href="#jeu.engine.Dealer.Dealer.is_one_pair">is_one_pair</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_royal_straight_flush" href="#jeu.engine.Dealer.Dealer.is_royal_straight_flush">is_royal_straight_flush</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_straight" href="#jeu.engine.Dealer.Dealer.is_straight">is_straight</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_straight_flush" href="#jeu.engine.Dealer.Dealer.is_straight_flush">is_straight_flush</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_tree_of_kind" href="#jeu.engine.Dealer.Dealer.is_tree_of_kind">is_tree_of_kind</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.is_two_pairs" href="#jeu.engine.Dealer.Dealer.is_two_pairs">is_two_pairs</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.players" href="#jeu.engine.Dealer.Dealer.players">players</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.reset_total_blind" href="#jeu.engine.Dealer.Dealer.reset_total_blind">reset_total_blind</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.small_blind" href="#jeu.engine.Dealer.Dealer.small_blind">small_blind</a></code></li>
+<li><code><a title="jeu.engine.Dealer.Dealer.total_blind" href="#jeu.engine.Dealer.Dealer.total_blind">total_blind</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
