@@ -1,17 +1,16 @@
 # SAE Texas HoldEm
 ## Contributeur
-    - Vandaele Joshua
+- Vandaele Joshua
 
-    - Bodart Jérémy
+- Bodart Jérémy
 
-    - Sailly Kevin
+- Sailly Kevin
 
-    - Vasseur Camille
+- Vasseur Camille
 
-    - Fermon Romain
-
+- Fermon Romain
 ## S3
-Introduction
+### Introduction
 
 Dans le cadre de la SAE S3, nous avons pour but de créer un jeu de poker jouable à 2 joueurs.
 
