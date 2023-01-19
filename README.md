@@ -1,15 +1,15 @@
 # SAE Texas HoldEm
 ## Contributeur
 
-    Vandaele Joshua
+    - Vandaele Joshua
 
-    Bodart Jérémy
+    - Bodart Jérémy
 
-    Sailly Kevin
+    - Sailly Kevin
 
-    Vasseur Camille
+    - Vasseur Camille
 
-    Fermon Romain
+    - Fermon Romain
 
 ## S3
 Introduction
