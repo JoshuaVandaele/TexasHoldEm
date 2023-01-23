@@ -8,4 +8,4 @@ screen: pygame.surface.Surface = pygame.display.set_mode((1280, 720), pygame.RES
 
 
     
-main_menu(screen)  
+main_menu(screen)

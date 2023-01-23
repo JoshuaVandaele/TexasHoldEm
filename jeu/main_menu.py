@@ -37,8 +37,14 @@ def main_menu(screen: pygame.surface.Surface):
     background: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/menu_background.png"))
 
     menu_text: pygame.surface.Surface = menu_font.get_font(
-        100).render("MAIN MENU", True, "#EEEEEE")
+        100).render("Texas Hold'Em", True, "#EEEEEE")
     menu_rect: pygame.rect.Rect = menu_text.get_rect(center=(640, 75))
+    
+    background_image_1: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/main_menu_image_1.png"))
+    rect_background_image_1: pygame.rect.Rect = background_image_1.get_rect(center = (200,screen.get_height()//2))
+    
+    background_image_2: pygame.surface.Surface = pygame.image.load(resource_path("jeu/assets/images/main_menu_image_2.png"))
+    rect_background_image_2: pygame.rect.Rect = background_image_1.get_rect(center = (screen.get_width() - 200, screen.get_height()//2 + 50))
 
     play_button = Button(
         screen=screen,
@@ -47,7 +53,7 @@ def main_menu(screen: pygame.surface.Surface):
         text="PLAY",
         font=menu_font.get_font(75),
         color="#FFFFFF",
-        hover_color="#d7fcd4",
+        hover_color="#999999",
         action=lambda: poker_table(screen, ["PLAYERNAME00", "PLAYERNAME01"])
     )
     options_button = Button(
@@ -57,7 +63,7 @@ def main_menu(screen: pygame.surface.Surface):
         text="OPTIONS",
         font=menu_font.get_font(75),
         color="#FFFFFF",
-        hover_color="#d7fcd4",
+        hover_color="#999999",
         action=lambda: options_screen(screen)
     )
     quit_button = Button(
@@ -67,7 +73,7 @@ def main_menu(screen: pygame.surface.Surface):
         text="QUIT",
         font=menu_font.get_font(75),
         color="#FFFFFF",
-        hover_color="#d7fcd4",
+        hover_color="#999999",
         action=quit
     )
 
@@ -93,6 +99,9 @@ def main_menu(screen: pygame.surface.Surface):
         print(int(clock.get_fps()), end=" FPS    \r")
         # Blit the background to screen first /!\
         screen.blit(background, (0, 0))
+        # Blit background image
+        screen.blit(background_image_1,rect_background_image_1)
+        screen.blit(background_image_2,rect_background_image_2)
         # Display all text on screen
         screen.blit(menu_text, menu_rect)
 
