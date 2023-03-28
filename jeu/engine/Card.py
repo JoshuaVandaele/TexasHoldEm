@@ -41,12 +41,10 @@ class Card:
         return self.__value > other
     
     def __le__(self: Card, other: Card | int) -> bool:
-        if self == other: return True
-        return self < other
+        return True if self == other else self < other
 
     def __ge__(self: Card, other: Card | int) -> bool:
-        if self == other: return True
-        return self > other
+        return True if self == other else self > other
 
         
     # <----- operateur ----->
