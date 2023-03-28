@@ -285,14 +285,12 @@ def count_out(hand: list[Card], board: list[Card]) -> int:
 
     deck.extend(card for card in d.cards if not card.exit_in(hand + board))
     out: int = sum(bool(better_hand(hand + [card], hand, board)) for card in deck)
-    print(out)
     return out
 
 def get_proba_out(hand: list[Card], board: list[Card], phase: int) -> float:
     global out_table
     out: int = count_out(hand, board)
-    if out > len(out_table): return (out/(52-5+phase-1))*100
-    return out_table[count_out(hand, board)][phase - 2]
+    return (out/(52-5+phase-1))*100 if out > len(out_table) else out_table[count_out(hand, board) - 1][phase - 2]
 
 def get_hand_power(hand: list[Card], board: list[Card]) -> int:
     return get_best_combination(hand + board)[0]
