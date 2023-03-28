@@ -70,6 +70,14 @@ class Card:
     # <----- repr ----->
     
     def __repr__(self: Card) -> str: return f"{self.__value} of {self.__suit}"
+    
+    # <----- exist_in ----->
+    
+    def exit_in(self: Card, cards: list[Card]) -> bool:
+        for card in cards:
+            if card.suit == self.__suit and card.value == self.__value:
+                return True
+        return False
         
     
     # <----- sort_occurence ----->

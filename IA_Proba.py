@@ -1,4 +1,31 @@
 from Card import Card
+from Deck import Deck
+
+out_table: list = [
+    # %T     %R     %T+R
+    [0, 0, 0], # 0 Out
+    [2.130, 2.170, 4.260], # 1 Out
+    [4.260, 4.350, 8.420], # 2 Outs
+    [6.380, 6.520, 12.49], # 3 Outs
+    [8.510, 8.700, 16.47], # 4 Outs
+    [10.64, 10.87, 20.35], # 5 Outs
+    [12.77, 13.04, 24.14], # 6 Outs
+    [14.89, 15.22, 27.84], # 7 Outs
+    [17.02, 17.39, 31.45], # 8 Outs
+    [19.15, 19.57, 34.97], # 9 Outs
+    [21.28, 21.74, 38.39], # 10 Outs
+    [23.40, 23.91, 41.72], # 11 Outs
+    [25.53, 26.09, 44.96], # 12 Outs
+    [27.66, 28.26, 48.10], # 13 Outs
+    [29.79, 30.43, 51.16], # 14 Outs
+    [31.91, 32.61, 54.12], # 15 Outs
+    [34.04, 34,78, 56.98], # 16 Outs
+    [36.17, 36.96, 59.76], # 17 Outs
+    [38.30, 39.13, 62.44], # 18 Outs
+    [40.43, 41.30, 65.03], # 19 Outs
+    [42.55, 43.48, 67.53], # 20 Outs
+    [44.68, 45.65, 69.94], # 21 Outs
+    [46.81, 47.83, 72.25]] # 22 Outs
 
 def is_highest_card(cards: list[Card]) -> int:
     
@@ -252,8 +279,49 @@ def better_hand(hand1: list[Card], hand2: list[Card], board: list[Card]) -> bool
     for i in range(size):
         if i +1 == size:
             if best_hand1[i] == best_hand2[i]: return False
-            if best_hand1 > best_hand2: return True
+            elif best_hand1[i] > best_hand2[i]: return True
+    
+    return False
+
+def count_out(hand: list[Card], board: list[Card]) -> int:
+    out: int = 0    
+    
+    deck :list [Card] = []
+    d: Deck = Deck()
+    
+    for card in d.cards:
+        if not card.exit_in(hand + board):
+            deck.append(card)
             
+    for card in deck:
+        if better_hand(hand + [card], hand, board): out += 1
+    
+    print(out)
+    return out
+
+def get_proba_out(hand: list[Card], board: list[Card], phase: int) -> float:
+    global out_table
+    out: int = count_out(hand, board)
+    if out > len(out_table): return (out/(52-5+phase-1))*100
+    return out_table[count_out(hand, board)][phase - 2]
+
+def get_hand_power(hand: list[Card], board: list[Card]) -> int:
+    return get_best_combination(hand + board)[0]
+
+def decision(hand: list[Card], board: list[Card], phase: int, current_dealer: int, first_turn: bool) -> str:
+    proba_out: float = get_proba_out(hand, board, phase)
+    hand_power: int = get_hand_power(hand, board)
+    
+    if hand_power == 10: 
+        if first_turn: ...
+        else: ...
+    else:
+        return 'fold'
     
 if __name__ == "__main__":
-    print(get_best_combination([Card(13,"Heart"),Card(9,"Heart"),Card(12,"Heart"),Card(11,"Heart"),Card(10,"Heart"),Card(7,"spade")]))
+
+    hand: list[Card] = [Card(12,"spade"), Card(11,"spade")]
+    board: list[Card] = [Card(10,"he art"), Card(7,"diamond"), Card(13,"diamond")]
+    
+    print(get_proba_out(hand, board, 2))
+        
