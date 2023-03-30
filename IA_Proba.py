@@ -444,27 +444,6 @@ def get_hand_power(hand: list[Card], board: list[Card]) -> int:
     """
     return get_best_combination(hand + board)[0]
 
-def decision(hand: list[Card], board: list[Card], phase: int, current_dealer: bool) -> str:
-    """Return the action for the IA
-
-    Args:
-        hand (list[Card]): Hand of the IA
-        board (list[Card]): Board on the field
-        phase (int): Phase of the round
-        current_dealer (int): If the IA is the current dealer
-
-    Returns:
-        str: Action
-    """
-    proba_out: float = get_proba_out(hand, board, phase)
-    hand_power: int = get_hand_power(hand, board)
-    
-    if hand_power == 10: 
-        if phase == 0: ...
-        else: ...
-    else:
-        return 'fold'
-
 # <========== Main ==========>
 
 if __name__ == "__main__":
