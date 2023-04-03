@@ -33,6 +33,26 @@ class IA(Player):
     @property
     def action(self: IA) -> str: return super().action
     
+    # <----- setter ----->
+    
+    @name.setter
+    def name(self: IA, new_name: str) -> None: object.__getattribute__(self, '_find')(new_name)
+    
+    @bankroll.setter
+    def bankroll(self: IA, new_bankroll: Bankroll | int) -> None:
+        if isinstance(new_bankroll, int): object.__getattribute__(self, '_find')(Bankroll(new_bankroll))
+        else: object.__getattribute__(self, '_find')(new_bankroll)
+    
+    @bet.setter
+    def bet(self: IA, new_bet: int) -> None: object.__getattribute__(self, '_find')(new_bet)
+    
+    @hand.setter
+    def hand(self: IA, new_hand: Hand) -> None: object.__getattribute__(self, '_find')(new_hand)   
+    
+    @action.setter
+    def action(self: IA, new_action: str) -> None: object.__getattribute__(self, '_find')(new_action)
+    
+    # <----- IA decision ----->
     
     def generate_bet_value(self: IA) -> int:...
         
