@@ -1,7 +1,7 @@
 # <========== import ==========>
 
 from __future__ import annotations
-from random import randint
+from random import randint, choice
 
 from Hand import Hand
 from Board import Board
@@ -54,9 +54,10 @@ class IA(Player):
     
     # <----- IA decision ----->
     
-    def generate_bet_value(self: IA) -> int:...
+    def generate_bet_value(self: IA, current_bet: int) -> int:
+        return randint(current_bet, self.bankroll.__value)
         
-    def decision(self: IA, board: list[Card], phase: int, current_dealer: bool, total_blind: int, blind: int) -> tuple(str|int) | None:
+    def decision(self: IA, board: list[Card], phase: int, current_dealer: bool, total_blind: int, blind: int, can_check: bool = False) -> tuple[str, int]:
         """Return the action for the IA
 
         Args:
@@ -66,18 +67,31 @@ class IA(Player):
             current_dealer (int): If the IA is the current dealer
 
         Returns:
-            tuple(str|int) | None: (Action, Value) or None (fold)
+            tuple[str, int] : (Action, Value)
         """
         proba_out: float = get_proba_out(self.__hand.cards, board, phase)
         hand_power: int = get_hand_power(self.__hand.cards, board)
         pot_odds: float = get_pot_odds(total_blind, blind)
         
-        if hand_power == 10: 
-            if phase == 0 and current_dealer: return ('raise', self.generate_bet_value())
-        elif proba_out >= 50: ...
-        elif proba_out >= 25: ...
-    
-        return None
+        tuple_choice: tuple[str, int] = ('fold', 0)
+        
+        # if royal flush
+        if hand_power == 10:
+            if current_dealer: tuple_choice = ('raise', self.generate_bet_value(blind))
+            else: tuple_choice = choice([('call', 0), ('raise', self.generate_bet_value(blind))])
+        
+        elif proba_out >= 50:
+            if current_dealer: tuple_choice = ('check', self.generate_bet_value(blind))
+            else:
+                if can_check: tuple_choice= choice([('check', 0), ('raise', self.generate_bet_value(blind))])
+                else: tuple_choice = choice([('call', 0), ('raise', self.generate_bet_value(blind))])
+            
+        elif proba_out >= 25:
+            if can_check: tuple_choice = ('check', 0)
+            elif hand_power >= 5: tuple_choice = ('call', 0)
+                
+        self.action = tuple_choice[0]        
+        return tuple_choice
         
 if __name__ == "__main__":
 
