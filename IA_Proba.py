@@ -444,11 +444,23 @@ def get_hand_power(hand: list[Card], board: list[Card]) -> int:
     """
     return get_best_combination(hand + board)[0]
 
+def get_pot_odds(total_blind: int, blind: int) -> float:
+    """Returns the pot odds on percentage
+
+    Args:
+        total_blind (int): the pot value
+        blind (int): the current blind for call
+
+    Returns:
+        float: pot odds
+    """
+    return blind / total_blind * 100
+
 # <========== Main ==========>
 
 if __name__ == "__main__":
     
-    hand: list[Card] = [Card(12,"spade"), Card(11,"spade")]
-    board: list[Card] = [Card(10,"he art"), Card(7,"diamond"), Card(13,"diamond")]
+    hand: list[Card] = [Card(10,"carreau"), Card(11,"coeur")]
+    board: list[Card] = [Card(5,"coeur"), Card(4,"carreau"), Card(3,"trefle")]
     
-    print(get_proba_out(hand, board, 2))
+    print(get_proba_out(hand, board, 0))
