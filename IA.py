@@ -8,6 +8,7 @@ from Board import Board
 from Dealer import Dealer
 from Player import Player
 from Card import Card
+from Bankroll import Bankroll
 from IA_Proba import *
 
 class IA(Player):
@@ -15,6 +16,24 @@ class IA(Player):
     def __init__(self: Player, hand: Hand | None = None, bankroll: int = 100) -> None:
         super().__init__("IA", hand, bankroll)
         
+    # <----- getter ----->
+    
+    @property
+    def name(self: IA) -> str: return super().name
+    
+    @property
+    def bankroll(self: IA) -> Bankroll: return super().bankroll
+    
+    @property
+    def bet(self: IA) -> int: return super().bet
+    
+    @property
+    def hand(self: IA) -> Hand: return super().hand
+    
+    @property
+    def action(self: IA) -> str: return super().action
+    
+    
     def generate_bet_value(self: IA) -> int:...
         
     def decision(self: IA, board: list[Card], phase: int, current_dealer: bool, total_blind: int, blind: int) -> tuple(str|int) | None:
