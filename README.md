@@ -18,4 +18,6 @@ Nous avons pris la décision de développer celui-ci en Python à l'aide de la b
 
 ## S4
 
+dans cette partie, nous avons du créer une IA.
+L'IA devra être suffisament compétitif afin de proposer un challenge pour le joueur.
 ## Test
