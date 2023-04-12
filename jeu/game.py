@@ -13,7 +13,8 @@ def formatted_score(score: int) -> str:
     return f"{score:03d}"
 
 def formatted_time(time_in_seconds: int) -> str:
-    minutes, seconds = divmod(time_in_seconds, 60)
+    minutes = time_in_seconds // 60
+    seconds = time_in_seconds % 60
     return f"{minutes:02d}:{seconds:02d}"
 
 def get_timer_label(start_time_in_seconds: float, font: FontManager):
