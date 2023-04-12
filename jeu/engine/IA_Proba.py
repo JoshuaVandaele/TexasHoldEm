@@ -1,7 +1,7 @@
 # <========== Local Import ==========>
 
-from Card import Card
-from Deck import Deck
+from jeu.engine.Card import Card
+from jeu.engine.Deck import Deck
 
 # <========== Out Table ==========>
 

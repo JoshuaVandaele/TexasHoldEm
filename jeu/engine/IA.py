@@ -3,13 +3,13 @@
 from __future__ import annotations
 from random import randint, choice
 
-from Hand import Hand
-from Board import Board
-from Dealer import Dealer
-from Player import Player
-from Card import Card
-from Bankroll import Bankroll
-from IA_Proba import *
+from jeu.engine.Hand import Hand
+from jeu.engine.Board import Board
+from jeu.engine.Dealer import Dealer
+from jeu.engine.Player import Player
+from jeu.engine.Card import Card
+from jeu.engine.Bankroll import Bankroll
+from jeu.engine.IA_Proba import *
 
 
 class IA(Player):

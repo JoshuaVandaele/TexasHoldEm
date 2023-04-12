@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from Card import Card
+from jeu.engine.Card import Card
 
 # <========== class ==========>
 
