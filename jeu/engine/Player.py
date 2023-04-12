@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from Bankroll import Bankroll
-from Hand import Hand
+from jeu.engine.Bankroll import Bankroll
+from jeu.engine.Hand import Hand
 
 # <========== Class ==========>
 

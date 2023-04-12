@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from Card import Card
-from Deck import Deck
-from Player import Player
-from Board import Board
-from Hand import Hand
+from jeu.engine.Card import Card
+from jeu.engine.Deck import Deck
+from jeu.engine.Player import Player
+from jeu.engine.Board import Board
+from jeu.engine.Hand import Hand
 
 # <========= class ==========>
 
@@ -40,31 +40,32 @@ class Dealer:
 
     @property
     def total_blind(self: Dealer) -> int: return self.__total_blind
-    
+
     @property
     def big_blind(self: Dealer) -> int: return self.__big_blind
 
     @property
     def small_blind(self: Dealer) -> int: return self.__big_blind // 2
-    
+
     # <----- setter ----->
 
     @blind.setter
     def blind(self: Dealer, new_blind: int) -> None: self.__blind = new_blind
 
     @total_blind.setter
-    def total_blind(self: Dealer, new_total_blind: int) -> None: self.__total_blind = new_total_blind
-    
+    def total_blind(
+        self: Dealer, new_total_blind: int) -> None: self.__total_blind = new_total_blind
+
     @big_blind.setter
-    def big_blind(self: Dealer, new_big_blind: int) -> None: self.__big_blind = new_big_blind
+    def big_blind(
+        self: Dealer, new_big_blind: int) -> None: self.__big_blind = new_big_blind
 
     # <----- reset total blind ----->
-    
+
     def reset_total_blind(self: Dealer) -> None:
         self.__blind: int = self.__big_blind
         self.__total_blind: int = self.__big_blind + (self.__big_blind // 2)
-        
-    
+
     # <----- distribute ----->
 
     def distribute(self: Dealer, shuffle: bool = False) -> None:
@@ -208,12 +209,13 @@ class Dealer:
             list: if their have full house = True + hand composition or False in a list
         """
 
-        cards: list[Card] = [card for card in self.__players[player_index].hand.cards]
-    
+        cards: list[Card] = [
+            card for card in self.__players[player_index].hand.cards]
+
         if check_board:
             for card in self.__board.cards:
                 cards.append(card)
-                
+
         occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
 
         three_of_kind: int | None = None
@@ -242,12 +244,13 @@ class Dealer:
             list: if their have flush = True + hand composition or False in a list
         """
 
-        cards: list[Card] = [card for card in self.__players[player_index].hand.cards]
-        
+        cards: list[Card] = [
+            card for card in self.__players[player_index].hand.cards]
+
         if check_board:
             for card in self.__board.cards:
                 cards.append(card)
-                
+
         cards.sort(reverse=True)
 
         suit: list[str] = []
@@ -278,12 +281,13 @@ class Dealer:
             list: if their have straight = True + hand composition or False in a list
         """
 
-        cards: list[int] = [card.value for card in self.__players[player_index].hand.cards]
-        
+        cards: list[int] = [
+            card.value for card in self.__players[player_index].hand.cards]
+
         if check_board:
             for card in self.__board.cards:
                 cards.append(card.value)
-                
+
         cards.sort(reverse=True)
 
         if 1 in cards and 13 in cards and 12 in cards and 11 in cards and 10 in cards:
@@ -321,7 +325,7 @@ class Dealer:
         """
 
         cards: list[Card] = self.__players[player_index].hand.cards
-            
+
         if check_board:
             for card in self.__board.cards:
                 cards.append(card)
@@ -353,7 +357,7 @@ class Dealer:
         """
 
         cards: list[Card] = self.__players[player_index].hand.cards
-        
+
         if check_board:
             for card in self.__board.cards:
                 cards.append(card)
@@ -381,7 +385,7 @@ class Dealer:
     def is_one_pair(self: Dealer, player_index: int, check_board: bool = True) -> list:
 
         cards: list[Card] = self.__players[player_index].hand.cards
-            
+
         if check_board:
             for card in self.__board.cards:
                 cards.append(card)
@@ -410,12 +414,13 @@ class Dealer:
         Returns:
             list[int]: the hand composition
         """
-        
-        cards: list[int] = [card.value for card in self.__players[player_index].hand.cards]
+
+        cards: list[int] = [
+            card.value for card in self.__players[player_index].hand.cards]
         if check_board:
             for card in self.__board.cards:
                 cards.append(card.value)
-        
+
         cards.sort(reverse=True)
         while cards[-1] == 1:
             cards.insert(0, 1)
@@ -489,6 +494,3 @@ class Dealer:
                 return player2_index
 
         return -1
-                        
-        
-        
