@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from jeu.engine.Card import Card
-from jeu.engine.Deck import Deck
-from jeu.engine.Player import Player
-from jeu.engine.Board import Board
-from jeu.engine.Hand import Hand
+from Card import Card
+from Deck import Deck
+from Player import Player
+from Board import Board
+from Hand import Hand
 
 # <========= class ==========>
 
@@ -79,8 +79,12 @@ class Dealer:
             self.__deck.shuffle()
 
         for player in self.__players:
-            player.hand.cards[0] = self.__deck.draw()
-            player.hand.cards[1] = self.__deck.draw()
+            if len(player.hand.cards) == 2:
+                player.hand.cards[0] = self.__deck.draw()
+                player.hand.cards[1] = self.__deck.draw()
+            else:
+                player.hand.cards.append(self.__deck.draw())
+                player.hand.cards.append(self.__deck.draw())
 
         self.__deck.burn()
         self.__board.cards = [self.__deck.draw() for i in range(3)]
@@ -193,7 +197,7 @@ class Dealer:
 
     # <----- is_full_house ----->
 
-    def is_full_house(self: Dealer, player_index: int) -> list:
+    def is_full_house(self: Dealer, player_index: int, check_board: bool = True) -> list:
         """ Define if their have full house
 
         Args:
@@ -204,7 +208,12 @@ class Dealer:
             list: if their have full house = True + hand composition or False in a list
         """
 
-        cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+        cards: list[Card] = [card for card in self.__players[player_index].hand.cards]
+    
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card)
+                
         occurence:  list[tuple[int, int]] = Card.sort_occurence(cards)
 
         three_of_kind: int | None = None
@@ -222,7 +231,7 @@ class Dealer:
 
     # <----- is_flush ----->
 
-    def is_flush(self: Dealer, player_index: int) -> list:
+    def is_flush(self: Dealer, player_index: int, check_board: bool = True) -> list:
         """ Define if their have flush
 
         Args:
@@ -233,7 +242,12 @@ class Dealer:
             list: if their have flush = True + hand composition or False in a list
         """
 
-        cards: list[Card] = [card for card in (self.__board.cards + self.__players[player_index].hand.cards)]
+        cards: list[Card] = [card for card in self.__players[player_index].hand.cards]
+        
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card)
+                
         cards.sort(reverse=True)
 
         suit: list[str] = []
@@ -253,7 +267,7 @@ class Dealer:
 
     # <----- is_straight ----->
 
-    def is_straight(self: Dealer, player_index: int) -> list:
+    def is_straight(self: Dealer, player_index: int, check_board: bool = True) -> list:
         """ Define if their have straight
 
         Args:
@@ -264,8 +278,12 @@ class Dealer:
             list: if their have straight = True + hand composition or False in a list
         """
 
-        cards: list[int] = [card.value for card in (
-            self.__board.cards + self.__players[player_index].hand.cards)]
+        cards: list[int] = [card.value for card in self.__players[player_index].hand.cards]
+        
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card.value)
+                
         cards.sort(reverse=True)
 
         if 1 in cards and 13 in cards and 12 in cards and 11 in cards and 10 in cards:
@@ -291,7 +309,7 @@ class Dealer:
 
     # <----- is_three_of_kind ----->
 
-    def is_tree_of_kind(self: Dealer, player_index: int) -> list:
+    def is_three_of_kind(self: Dealer, player_index: int, check_board: bool = True) -> list:
         """ Define if their have tree of kind
 
         Args:
@@ -302,8 +320,11 @@ class Dealer:
             list: if their have tree of kind = True + hand composition or False in a list
         """
 
-        cards: list[Card] = self.__board.cards + \
-            self.__players[player_index].hand.cards
+        cards: list[Card] = self.__players[player_index].hand.cards
+            
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card)
 
         occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
         three_of_kind: int | None = None
@@ -320,7 +341,7 @@ class Dealer:
 
     # <----- is_two_pairs----->
 
-    def is_two_pairs(self: Dealer, player_index: int) -> list:
+    def is_two_pairs(self: Dealer, player_index: int, check_board: bool = True) -> list:
         """ Define if their have two pairs
 
         Args:
@@ -331,8 +352,11 @@ class Dealer:
             list: if their have two pairs = True + hand composition or False in a list
         """
 
-        cards: list[Card] = self.__board.cards + \
-            self.__players[player_index].hand.cards
+        cards: list[Card] = self.__players[player_index].hand.cards
+        
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card)
 
         occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
 
@@ -354,19 +378,13 @@ class Dealer:
 
     # <----- is_one_pair ----->
 
-    def is_one_pair(self: Dealer, player_index: int) -> list:
-        """ Define if their have one pair
+    def is_one_pair(self: Dealer, player_index: int, check_board: bool = True) -> list:
 
-        Args:
-            self (Dealer): self
-            player_index (int): index for the hand you want to check
-
-        Returns:
-            list: if their have one pair = True + hand composition or False in a list
-        """
-
-        cards: list[Card] = self.__board.cards + \
-            self.__players[player_index].hand.cards
+        cards: list[Card] = self.__players[player_index].hand.cards
+            
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card)
 
         occurence: list[tuple[int, int]] = Card.sort_occurence(cards)
 
@@ -382,7 +400,7 @@ class Dealer:
         else:
             return [False]
 
-    def is_highest_card(self: Dealer, player_index: int) -> list[int]:
+    def is_highest_card(self: Dealer, player_index: int, check_board: bool = True) -> list[int]:
         """define the hand if you doesn't have combination
 
         Args:
@@ -392,7 +410,12 @@ class Dealer:
         Returns:
             list[int]: the hand composition
         """
-        cards: list[int] = [card.value for card in self.__board.cards + self.__players[player_index].hand.cards]
+        
+        cards: list[int] = [card.value for card in self.__players[player_index].hand.cards]
+        if check_board:
+            for card in self.__board.cards:
+                cards.append(card.value)
+        
         cards.sort(reverse=True)
         while cards[-1] == 1:
             cards.insert(0, 1)
@@ -420,7 +443,7 @@ class Dealer:
             return [9] + self.is_straight_flush(player_index)[1:]
 
         elif self.is_four_of_kind(player_index)[0]:
-            return [5] + self.is_four_of_kind(player_index)[1:]
+            return [8] + self.is_four_of_kind(player_index)[1:]
 
         elif self.is_full_house(player_index)[0]:
             return [7] + self.is_straight(player_index)[1:]
@@ -431,8 +454,8 @@ class Dealer:
         elif self.is_straight(player_index)[0]:
             return [5] + self.is_straight(player_index)[1:]
 
-        elif self.is_tree_of_kind(player_index)[0]:
-            return [4] + self.is_tree_of_kind(player_index)[1:]
+        elif self.is_three_of_kind(player_index)[0]:
+            return [4] + self.is_three_of_kind(player_index)[1:]
 
         elif self.is_two_pairs(player_index)[0]:
             return [3] + self.is_two_pairs(player_index)[1:]
@@ -466,13 +489,6 @@ class Dealer:
                 return player2_index
 
         return -1
-
-
-if __name__ == "__main__":
-    h: Hand = Hand([Card(2, 'nuke'), Card(2, 'nuke')])
-    b: Board = Board([Card(1, 'spade'), Card(13, 'spade'), Card(
-        12, 'spade'), Card(11, 'spade'), Card(10, 'spade')])
-    p: Player = Player('silver', 1, h)
-    d: Dealer = Dealer(Deck(), [p], b)
-
-    print(d.is_royal_straight_flush(0))
+                        
+        
+        

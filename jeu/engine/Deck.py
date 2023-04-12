@@ -5,7 +5,7 @@ from __future__ import annotations
 from random import shuffle
 from typing import Final
 
-from jeu.engine.Card import Card
+from Card import Card
 
 # <========== Class ==========>
 
@@ -13,7 +13,7 @@ class Deck:
     
     # <----- init ----->
     
-    def __init__(self: Deck, numberOfCards: int = 52, suitList: list[str]|None = None) -> None:
+    def __init__(self: Deck, numberOfCards: int = 52, suitList: list[str] | None = None) -> None:
         if suitList == None: suitList = ["heart","diamond","club","spade"]
         
         self.__SUIT_LIST: Final[list[str]] = suitList.copy()
