@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from jeu.engine.Card import Card
+from Card import Card
 # <========== class ==========>
 
 class Hand:
@@ -21,4 +21,13 @@ class Hand:
     
     @cards.setter
     def cards(self: Hand, newCards: list[Card]) -> None: self.__cards = newCards
+    
+    # <----- str ----->
+    
+    def __str__(self: Hand) -> str: return f"({self.cards[0]}; {self.cards[1]})"
+    
+    # <----- repr ----->
+
+    def __repr__(self: Hand) -> str: return f"({self.cards[0]}; {self.cards[1]})"
+        
         
