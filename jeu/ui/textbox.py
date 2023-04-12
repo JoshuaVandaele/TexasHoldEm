@@ -81,7 +81,7 @@ class Textbox(UI):
             event (pygame.event.Event): Event to process
         """
         mouse_pos: tuple[float, float] = (pygame.mouse.get_pos()[0]-self.detection_offset[0], pygame.mouse.get_pos()[1]-self.detection_offset[1])
-        match event.type:
+        match (event.type):
             case pygame.MOUSEBUTTONUP:
                 if self.rect.collidepoint(mouse_pos):
                     self.repeat_settings = pygame.key.get_repeat()
@@ -90,7 +90,7 @@ class Textbox(UI):
                 else:
                     try:
                         pygame.key.set_repeat(*self.repeat_settings)
-                    except Exception:
+                    except:
                         pass
                     self.focused = False
             case pygame.KEYDOWN:

@@ -14,16 +14,15 @@ class Deck:
     # <----- init ----->
     
     def __init__(self: Deck, numberOfCards: int = 52, suitList: list[str]|None = None) -> None:
-        if suitList is None: suitList = ["heart","diamond","club","spade"]
-
+        if suitList == None: suitList = ["heart","diamond","club","spade"]
+        
         self.__SUIT_LIST: Final[list[str]] = suitList.copy()
         self.__NUMBER_OF_CARDS: Final[int] = numberOfCards
         self.__cards: list[Card] = []
-
+        
         for suit in suitList:
-            self.__cards.extend(
-                Card(i, suit) for i in range(1, numberOfCards // len(suitList) + 1)
-            )
+            for i in range(1,int(numberOfCards/len(suitList))+1):
+                self.__cards.append(Card(i,suit))
                 
     # <----- getter ----->
     
@@ -51,12 +50,8 @@ class Deck:
     # <----- resetDeck ----->
     
     def reset_deck(self: Deck) -> None:
-        self.__cards = []
+        self.__cards = []        
         for suit in self.__SUIT_LIST:
-            self.__cards.extend(
-                Card(i, suit)
-                for i in range(
-                    1, int(self.__NUMBER_OF_CARDS / len(self.__SUIT_LIST)) + 1
-                )
-            )
+            for i in range(1, int(self.__NUMBER_OF_CARDS / len(self.__SUIT_LIST)) + 1):
+                self.__cards.append(Card(i, suit))
     
